@@ -489,160 +489,98 @@ var swiper = new Swiper(".upcoming-slider3", {
       ]
   });
 
-// timer start
-function makeTimer() {
-  var endTime = new Date("June 01, 2022 00:00:00");
-  var endTime = (Date.parse(endTime)) / 1000; //replace these two lines with the unix timestamp from the server
-  var now = new Date();
-  var now = (Date.parse(now) / 1000);
-  var timeLeft = endTime - now;
-  var days = Math.floor(timeLeft / 86400);
-  var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
-  var Xmas95 = new Date('December 25, 1995 23:15:30');
-  // console.log(Xmas95);
-  // console.log(Date.parse(timeLeft * 1000));
-  var hour = Xmas95.getHours();
-  // console.log(hour);
-  var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600)) / 60);
-  var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
-  if (hours < "10") {
-    hours = "0" + hours;
-  }
-  if (minutes < "10") {
-    minutes = "0" + minutes;
-  }
-  if (seconds < "10") {
-    seconds = "0" + seconds;
-  }
-  $("#timer #days").html( days);
-  $("#timer #hours").html( hours);
-  $("#timer #minutes").html( minutes);
-  $("#timer #seconds").html( seconds);
+//// timer start
+//function makeTimer() {
+//  var endTime = new Date("December 30, 2022 00:00:00");
+//  var endTime = (Date.parse(endTime)) / 1000; //replace these two lines with the unix timestamp from the server
+//  var now = new Date();
+//  var now = (Date.parse(now) / 1000);
+//  var timeLeft = endTime - now;
+//  var days = Math.floor(timeLeft / 86400);
+//  var hours = Math.floor((timeLeft - (days * 86400)) / 3600);
+//  var Xmas95 = new Date('December 25, 1995 23:15:30');
+//  console.log(Xmas95);
+//  console.log(Date.parse(timeLeft * 1000));
+//  var hour = Xmas95.getHours();
+//  // console.log(hour);
+//  var minutes = Math.floor((timeLeft - (days * 86400) - (hours * 3600)) / 60);
+//  var seconds = Math.floor((timeLeft - (days * 86400) - (hours * 3600) - (minutes * 60)));
+//  if (hours < "10") {
+//    hours = "0" + hours;
+//  }
+//  if (minutes < "10") {
+//    minutes = "0" + minutes;
+//  }
+//  if (seconds < "10") {
+//    seconds = "0" + seconds;
+//  }
+//
+//
+//  $("#timer1 #days1").html( days);
+//  $("#timer1 #hours1").html( hours);
+//  $("#timer1 #minutes1").html( minutes);
+//  $("#timer1 #seconds1").html( seconds);
+//
+//
+//
+//}
+//setInterval(function() {
+//  makeTimer();
+//}, 1000);
+//// timer end
+//
+//    // count-down-timer
+//    var setEndDate1 = "December 25, 2022 6:0:0";
+//
+//    var setEndDate7 = "March 1, 2023 0:0:1";
+//
+//
+//    function startCountDownDate(dateVal) {
+//      var countDownDate = new Date(dateVal).getTime();
+//      console.log("okkkkkkkkkk")
+//      return countDownDate;
+//    }
+//
+//    function countDownTimer(start, targetDOM) {
+//      // Get todays date and time
+//      var now = new Date().getTime();
+//
+//      // Find the distance between now and the count down date
+//      var distance = start - now;
+//
+//      // Time calculations for days, hours, minutes and seconds
+//      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+//      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+//      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+//      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+//
+//      // add 0 at the beginning if days, hours, minutes, seconds values are less than 10
+//      days = (days < 10) ? "0" + days : days;
+//      hours = (hours < 10) ? "0" + hours : hours;
+//      minutes = (minutes < 10) ? "0" + minutes : minutes;
+//      seconds = (seconds < 10) ? "0" + seconds : seconds;
+//
+//      // Output the result in an element with countdown-timer-x"
+//      var el_up = document.getElementById(targetDOM);
+//      if(el_up){
+//        document.querySelector("#" + targetDOM).textContent = days + "D : " + hours + "H : " + minutes + "M : " + seconds + "S ";
+//      }
+//
+//
+//      // If the count down is over, write some text
+//      if (distance < 0) {
+//        clearInterval();
+//        // document.querySelector("#" + targetDOM).textContent = "EXPIRED";
+//      }
+//    }
+//
+//    var cdd1 = startCountDownDate(setEndDate1);
+//
+//
+//    setInterval(function(){ countDownTimer(cdd1, "timer1"); }, 1000);
+//
 
-  $("#timer1 #days1").html( days);
-  $("#timer1 #hours1").html( hours);
-  $("#timer1 #minutes1").html( minutes);
-  $("#timer1 #seconds1").html( seconds);
 
-  $("#timer2 #days2").html( days);
-  $("#timer2 #hours2").html( hours);
-  $("#timer2 #minutes2").html( minutes);
-  $("#timer2 #seconds2").html( seconds);
-
-  $("#timer3 #days3").html( days);
-  $("#timer3 #hours3").html( hours);
-  $("#timer3 #minutes3").html( minutes);
-  $("#timer3 #seconds3").html( seconds);
-
-  $("#timer4 #days4").html( days);
-  $("#timer4 #hours4").html( hours);
-  $("#timer4 #minutes4").html( minutes);
-  $("#timer4 #seconds4").html( seconds);
-
-  $("#timer5 #days5").html( days);
-  $("#timer5 #hours5").html( hours);
-  $("#timer5 #minutes5").html( minutes);
-  $("#timer5 #seconds5").html( seconds);
-
-  $("#timer6 #days6").html( days);
-  $("#timer6 #hours6").html( hours);
-  $("#timer6 #minutes6").html( minutes);
-  $("#timer6 #seconds6").html( seconds);
-
-  $("#timer7 #days7").html( days);
-  $("#timer7 #hours7").html( hours);
-  $("#timer7 #minutes7").html( minutes);
-  $("#timer7 #seconds7").html( seconds);
-
-  $("#timer8 #days8").html( days);
-  $("#timer8 #hours8").html( hours);
-  $("#timer8 #minutes8").html( minutes);
-  $("#timer8 #seconds8").html( seconds);
-
-  $("#timer9 #days9").html( days);
-  $("#timer9 #hours9").html( hours);
-  $("#timer9 #minutes9").html( minutes);
-  $("#timer9 #seconds9").html( seconds);
-
-  $("#timer10 #days10").html( days);
-  $("#timer10 #hours10").html( hours);
-  $("#timer10 #minutes10").html( minutes);
-  $("#timer10 #seconds10").html( seconds);
-
-}
-setInterval(function() {
-  makeTimer();
-}, 1000);
-// timer end
-
-    // count-down-timer
-    var setEndDate1 = "October 25, 2022 6:0:0";
-    var setEndDate2 = "Jan 1, 2023 0:0:1";
-    var setEndDate3 = "Jan 1, 2023 0:0:1";
-    var setEndDate4 = "March 1, 2023 0:0:1";
-    var setEndDate5 = "March 1, 2023 0:0:1";
-    var setEndDate6 = "March 1, 2023 0:0:1";
-    var setEndDate7 = "March 1, 2023 0:0:1";
-    var setEndDate8 = "March 1, 2023 0:0:1";
-    var setEndDate9 = "March 1, 2023 0:0:1";
-
-    function startCountDownDate(dateVal) {
-      var countDownDate = new Date(dateVal).getTime();
-      return countDownDate;
-    }
-
-    function countDownTimer(start, targetDOM) {
-      // Get todays date and time
-      var now = new Date().getTime();
-      
-      // Find the distance between now and the count down date
-      var distance = start - now;
-      
-      // Time calculations for days, hours, minutes and seconds
-      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-      
-      // add 0 at the beginning if days, hours, minutes, seconds values are less than 10
-      days = (days < 10) ? "0" + days : days;
-      hours = (hours < 10) ? "0" + hours : hours;
-      minutes = (minutes < 10) ? "0" + minutes : minutes;
-      seconds = (seconds < 10) ? "0" + seconds : seconds;
-
-      // Output the result in an element with countdown-timer-x"
-      var el_up = document.getElementById(targetDOM);
-      if(el_up){
-        document.querySelector("#" + targetDOM).textContent = days + "D : " + hours + "H : " + minutes + "M : " + seconds + "S ";
-      }
-      
-      
-      // If the count down is over, write some text 
-      if (distance < 0) {
-        clearInterval();
-        // document.querySelector("#" + targetDOM).textContent = "EXPIRED";
-      }
-    }
-
-    var cdd1 = startCountDownDate(setEndDate1);
-    var cdd2 = startCountDownDate(setEndDate2);
-    var cdd3 = startCountDownDate(setEndDate3);
-    var cdd4 = startCountDownDate(setEndDate4);
-    var cdd5 = startCountDownDate(setEndDate5);
-    var cdd6 = startCountDownDate(setEndDate6);
-    var cdd7 = startCountDownDate(setEndDate7);
-    var cdd8 = startCountDownDate(setEndDate8);
-    var cdd9 = startCountDownDate(setEndDate9);
-
-    setInterval(function(){ countDownTimer(cdd1, "countdown-timer-1"); }, 1000);
-    setInterval(function(){ countDownTimer(cdd2, "countdown-timer-2"); }, 1000);
-    setInterval(function(){ countDownTimer(cdd3, "countdown-timer-3"); }, 1000);
-    setInterval(function(){ countDownTimer(cdd4, "countdown-timer-4"); }, 1000);
-    setInterval(function(){ countDownTimer(cdd5, "countdown-timer-5"); }, 1000);
-    setInterval(function(){ countDownTimer(cdd6, "countdown-timer-6"); }, 1000);
-    setInterval(function(){ countDownTimer(cdd7, "countdown-timer-7"); }, 1000);
-    setInterval(function(){ countDownTimer(cdd8, "countdown-timer-8"); }, 1000);
-    setInterval(function(){ countDownTimer(cdd9, "countdown-timer-9"); }, 1000);
 
 // password-hide and show
    

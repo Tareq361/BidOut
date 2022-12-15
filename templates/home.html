@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 {% block body %}
  <div class="hero-area hero-style-one">
         <div class="hero-main-wrapper position-relative">
@@ -399,10 +400,10 @@
     <!-- =============== live-action-section start=============== -->
 
     <div class="live-auction pb-120">
-        <img alt="image" src="assets/images/bg/section-bg.png" class="img-fluid section-bg" >
+        <img alt="image" src="{% static 'images/bg/section-bg.png' %}" class="img-fluid section-bg" >
         <div class="container position-relative">
-            <img alt="image" src="assets/images/bg/dotted1.png" class="dotted1" >
-            <img alt="image" src="assets/images/bg/dotted1.png" class="dotted2" >
+            <img alt="image" src="{% static 'images/bg/dotted1.png' %}" class="dotted1" >
+            <img alt="image" src="{% static 'images/bg/dotted1.png' %}" class="dotted2" >
             <div class="row d-flex justify-content-center">
                 <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">
                     <div class="section-title1">
@@ -413,27 +414,29 @@
                 </div>
             </div>
             <div class="row gy-4 mb-60 d-flex justify-content-center">
+               {% for item in items %}
                 <div class="col-lg-4 col-md-6 col-sm-10 ">
                     <div data-wow-duration="1.5s" data-wow-delay="0.2s" class="eg-card auction-card1 wow animate fadeInDown">
                         <div class="auction-img">
-                            <img alt="image" src="assets/images/bg/live-auc1.png" >
+                            <img alt="image" src="{{item.get_image.url}}" >
                             <div class="auction-timer">
-                                <div class="countdown" id="timer1">
+                                <div class="countdown" id="timer{{item.id}}" style="font-size:24px;font-weight:600;color: #444444;margin-bottom:0;">
+
                                     <h4><span id="hours1">05</span>H : <span id="minutes1">52</span>M : <span id="seconds1">32</span>S</h4>
                                 </div>
                             </div>
-                            <div class="author-area">
-                                <div class="author-emo">
-                                    <img alt="image" src="assets/images/icons/smile-emo.svg" >
-                                </div>
-                                <div class="author-name">
-                                    <span>by @robatfox</span>
-                                </div>
-                            </div>
+<!--                            <div class="author-area">-->
+<!--                                <div class="author-emo">-->
+<!--                                    <img alt="image" src="assets/images/icons/smile-emo.svg" >-->
+<!--                                </div>-->
+<!--                                <div class="author-name">-->
+<!--                                    <span>by @robatfox</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
                         </div>
                         <div class="auction-content">
-                            <h4><a href="auction-details.html">Brand New royal Enfield 250 CC For Sale</a></h4>
-                            <p>Bidding Price : <span><span>$85.9</span></span></p>
+                            <h4><a href="auction-details.html">{{item.productName}}</a></h4>
+                            <p>Bidding Price : <span><span>BDT{{item.base_price}}</span></span></p>
                             <div class="auction-card-bttm">
                                 <a href="auction-details.html" class="eg-btn btn--primary btn--sm">Place a Bid</a>
                                 <div class="share-area">
@@ -452,214 +455,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 col-md-6 col-sm-10 ">
-                    <div data-wow-duration="1.5s" data-wow-delay="0.4s" class="eg-card auction-card1 wow animate fadeInDown">
-                        <div class="auction-img">
-                            <img alt="image" src="assets/images/bg/live-auc2.png" >
-                            <div class="auction-timer">
-                                <div class="countdown" id="timer2">
-                                    <h4><span id="hours2">05</span>H : <span id="minutes2">52</span>M : <span
-                                            id="seconds2">32</span>S</h4>
-                                </div>
-                            </div>
-                            <div class="author-area">
-                                <div class="author-emo">
-                                    <img alt="image" src="assets/images/icons/smile-emo.svg" >
-                                </div>
-                                <div class="author-name">
-                                    <span>by @robatfox</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="auction-content">
-                            <h4><a href="auction-details.html">Wedding Special Exclusive Cupple Ring (S2022)</a></h4>
-                            <p>Bidding Price : <span>$85.9</span></p>
-                            <div class="auction-card-bttm">
-                                <a href="auction-details.html" class="eg-btn btn--primary btn--sm">Place a Bid</a>
-                                <div class="share-area">
-                                    <ul class="social-icons d-flex">
-                                        <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
-                                        <li><a href="https://www.twitter.com/"><i class="bx bxl-twitter"></i></a></li>
-                                        <li><a href="https://www.pinterest.com/"><i class="bx bxl-pinterest"></i></a></li>
-                                        <li><a href="https://www.instagram.com/"><i class="bx bxl-instagram"></i></a></li>
-                                    </ul>
-                                    <div>
-                                        <div class="share-btn"><i class='bx bxs-share-alt'></i></div>
-                                    </div>
-                                </div>
+                {%endfor%}
 
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-10 ">
-                    <div data-wow-duration="1.5s" data-wow-delay="0.6s" class="eg-card auction-card1 wow animate fadeInDown">
-                        <div class="auction-img">
-                            <img alt="image" src="assets/images/bg/live-auc3.png" >
-                            <div class="auction-timer">
-                                <div class="countdown" id="timer3">
-                                    <h4><span id="hours3">05</span>H : <span id="minutes3">52</span>M : <span
-                                            id="seconds3">32</span>S</h4>
-                                </div>
-                            </div>
-                            <div class="author-area">
-                                <div class="author-emo">
-                                    <img alt="image" src="assets/images/icons/smile-emo.svg" >
-                                </div>
-                                <div class="author-name">
-                                    <span>by @robatfox</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="auction-content">
-                            <h4><a href="auction-details.html">Brand New Honda CBR 600 RR For Special Sale (2022)</a></h4>
-                            <p>Bidding Price : <span>$85.9</span></p>
-                            <div class="auction-card-bttm">
-                                <a href="auction-details.html" class="eg-btn btn--primary btn--sm">Place a Bid</a>
-                                <div class="share-area">
-                                    <ul class="social-icons d-flex">
-                                        <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
-                                        <li><a href="https://www.twitter.com/"><i class="bx bxl-twitter"></i></a></li>
-                                        <li><a href="https://www.pinterest.com/"><i class="bx bxl-pinterest"></i></a></li>
-                                        <li><a href="https://www.instagram.com/"><i class="bx bxl-instagram"></i></a></li>
-                                    </ul>
-                                    <div>
-                                        <div class="share-btn"><i class='bx bxs-share-alt'></i></div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-10 ">
-                    <div data-wow-duration="1.5s" data-wow-delay=".2s" class="eg-card auction-card1 wow animate fadeInDown">
-                        <div class="auction-img">
-                            <img alt="image" src="assets/images/bg/live-auc4.png" >
-                            <div class="auction-timer">
-                                <div class="countdown" id="timer4">
-                                    <h4><span id="hours4">05</span>H : <span id="minutes4">52</span>M : <span
-                                            id="seconds4">32</span>S</h4>
-                                </div>
-                            </div>
-                            <div class="author-area">
-                                <div class="author-emo">
-                                    <img alt="image" src="assets/images/icons/smile-emo.svg" >
-                                </div>
-                                <div class="author-name">
-                                    <span>by @robatfox</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="auction-content">
-                            <h4><a href="auction-details.html">Toyota AIGID A Class Hatchback Sale (2017 - 2021)</a>
-                            </h4>
-                            <p>Bidding Price : <span>$85.9</span></p>
-                            <div class="auction-card-bttm">
-                                <a href="auction-details.html" class="eg-btn btn--primary btn--sm">Place a Bid</a>
-                                <div class="share-area">
-                                    <ul class="social-icons d-flex">
-                                        <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
-                                        <li><a href="https://www.twitter.com/"><i class="bx bxl-twitter"></i></a></li>
-                                        <li><a href="https://www.pinterest.com/"><i class="bx bxl-pinterest"></i></a></li>
-                                        <li><a href="https://www.instagram.com/"><i class="bx bxl-instagram"></i></a></li>
-                                    </ul>
-                                    <div>
-                                        <div class="share-btn"><i class='bx bxs-share-alt'></i></div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-10 ">
-                    <div data-wow-duration="1.5s" data-wow-delay=".4s" class="eg-card auction-card1 wow animate fadeInDown">
-                        <div class="auction-img">
-                            <img alt="image" src="assets/images/bg/live-auc5.png" >
-                            <div class="auction-timer">
-                                <div class="countdown" id="timer5">
-                                    <h4><span id="hours5">05</span>H : <span id="minutes5">52</span>M : <span
-                                            id="seconds5">32</span>S</h4>
-                                </div>
-                            </div>
-                            <div class="author-area">
-                                <div class="author-emo">
-                                    <img alt="image" src="assets/images/icons/smile-emo.svg" >
-                                </div>
-                                <div class="author-name">
-                                    <span>by @robatfox</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="auction-content">
-                            <h4><a href="auction-details.html">Havit HV-G61 USB Black Double Game Pad With Vibrat</a>
-                            </h4>
-                            <p>Bidding Price : <span>$85.9</span></p>
-                            <div class="auction-card-bttm">
-                                <a href="auction-details.html" class="eg-btn btn--primary btn--sm">Place a Bid</a>
-                                <div class="share-area">
-                                    <ul class="social-icons d-flex">
-                                        <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
-                                        <li><a href="https://www.twitter.com/"><i class="bx bxl-twitter"></i></a></li>
-                                        <li><a href="https://www.pinterest.com/"><i class="bx bxl-pinterest"></i></a></li>
-                                        <li><a href="https://www.instagram.com/"><i class="bx bxl-instagram"></i></a></li>
-                                    </ul>
-                                    <div>
-                                        <div class="share-btn"><i class='bx bxs-share-alt'></i></div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-lg-4 col-md-6 col-sm-10 ">
-                    <div data-wow-duration="1.5s" data-wow-delay=".4s" class="eg-card auction-card1 wow animate fadeInDown">
-                        <div class="auction-img">
-                            <img alt="image" src="assets/images/bg/live-auc6.png" >
-                            <div class="auction-timer">
-                                <div class="countdown" id="timer6">
-                                    <h4><span id="hours6">05</span>H : <span id="minutes6">52</span>M : <span
-                                            id="seconds6">32</span>S</h4>
-                                </div>
-                            </div>
-                            <div class="author-area">
-                                <div class="author-emo">
-                                    <img alt="image" src="assets/images/icons/smile-emo.svg" >
-                                </div>
-                                <div class="author-name">
-                                    <span>by @robatfox</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="auction-content">
-                            <h4><a href="auction-details.html">IPhone 11 Pro Max All Variants Available For Special Sale</a>
-                            </h4>
-                            <p>Bidding Price : <span>$85.9</span></p>
-                            <div class="auction-card-bttm">
-                                <a href="auction-details.html" class="eg-btn btn--primary btn--sm">Place a Bid</a>
-                                <div class="share-area">
-                                    <ul class="social-icons d-flex">
-                                        <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
-                                        <li><a href="https://www.twitter.com/"><i class="bx bxl-twitter"></i></a></li>
-                                        <li><a href="https://www.pinterest.com/"><i class="bx bxl-pinterest"></i></a></li>
-                                        <li><a href="https://www.instagram.com/"><i class="bx bxl-instagram"></i></a></li>
-                                    </ul>
-                                    <div>
-                                        <div class="share-btn"><i class='bx bxs-share-alt'></i></div>
-                                    </div>
-                                </div>
-
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
             </div>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-4 text-center">
@@ -742,171 +539,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="swiper-slide">
-                            <div class="eg-card c-feature-card1 wow animate fadeInDown" data-wow-duration="1.5s" data-wow-delay="0.4s">
-                                <div class="auction-img">
-                                    <img alt="image" src="assets/images/bg/umcoming2.png" >
-                                    <div class="auction-timer2 gap-lg-3 gap-md-2 gap-1" id="timer8">
-                                        <div class="countdown-single">
-                                            <h5 id="days8">7</h5>
-                                            <span>Days</span>
-                                        </div>
-                                        <div class="countdown-single">
-                                            <h5 id="hours8">05</h5>
-                                            <span>Hours</span>
-                                        </div>
-                                        <div class="countdown-single">
-                                            <h5 id="minutes8">56</h5>
-                                            <span>Mins</span>
-                                        </div>
-                                        <div class="countdown-single">
-                                            <h5 id="seconds8">08</h5>
-                                            <span>Secs</span>
-                                        </div>
-                                    </div>
-                                    <div class="author-area2">
-                                        <div class="author-name">
-                                            <span>by @robatfox</span>
-                                        </div>
-                                        <div class="author-emo">
-                                            <img alt="image" src="assets/images/bg/upcoming-author2.png" >
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="c-feature-content">
-                                    <div class="c-feature-category">Lit Gaslighte</div>
-                                    <a href="auction-details.html">
-                                        <h4>Watercolor Special Lighter 2.2 For Saleing Offer</h4>
-                                    </a>
-                                    <p>Bidding Price : <span>$15.99</span></p>
-                                    <div class="auction-card-bttm">
-                                        <a href="auction-details.html" class="eg-btn btn--primary btn--sm">View
-                                            Details</a>
-                                        <div class="share-area">
-                                            <ul class="social-icons d-flex">
-                                                <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
-                                                <li><a href="https://www.twitter.com/"><i class="bx bxl-twitter"></i></a></li>
-                                                <li><a href="https://www.pinterest.com/"><i class="bx bxl-pinterest"></i></a></li>
-                                                <li><a href="https://www.instagram.com/"><i class="bx bxl-instagram"></i></a></li>
-                                            </ul>
-                                            <div>
-                                                <a href="#" class="share-btn"><i class='bx bxs-share-alt'></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="eg-card c-feature-card1 wow animate fadeInDown" data-wow-duration="1.5s" data-wow-delay="0.6s">
-                                <div class="auction-img">
-                                    <img alt="image" src="assets/images/bg/umcoming3.png" >
-                                    <div class="auction-timer2 gap-lg-3 gap-md-2 gap-1" id="timer9">
-                                        <div class="countdown-single">
-                                            <h5 id="days9">7</h5>
-                                            <span>Days</span>
-                                        </div>
-                                        <div class="countdown-single">
-                                            <h5 id="hours9">05</h5>
-                                            <span>Hours</span>
-                                        </div>
-                                        <div class="countdown-single">
-                                            <h5 id="minutes9">56</h5>
-                                            <span>Mins</span>
-                                        </div>
-                                        <div class="countdown-single">
-                                            <h5 id="seconds9">08</h5>
-                                            <span>Secs</span>
-                                        </div>
-                                    </div>
-                                    <div class="author-area2">
-                                        <div class="author-name">
-                                            <span>by @robatfox</span>
-                                        </div>
-                                        <div class="author-emo">
-                                            <img alt="image" src="assets/images/bg/upcoming-author3.png" >
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="c-feature-content">
-                                    <div class="c-feature-category">Motor Bike</div>
-                                    <a href="auction-details.html">
-                                        <h4>BMW AIGID A Class Hatch M26 Motor Bike</h4>
-                                    </a>
-                                    <p>Bidding Price : <span>$15.99</span></p>
-                                    <div class="auction-card-bttm">
-                                        <a href="auction-details.html" class="eg-btn btn--primary btn--sm">View
-                                            Details</a>
-                                        <div class="share-area">
-                                            <ul class="social-icons d-flex">
-                                                <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
-                                                <li><a href="https://www.twitter.com/"><i class="bx bxl-twitter"></i></a></li>
-                                                <li><a href="https://www.pinterest.com/"><i class="bx bxl-pinterest"></i></a></li>
-                                                <li><a href="https://www.instagram.com/"><i class="bx bxl-instagram"></i></a></li>
-                                            </ul>
-                                            <div>
-                                                <a href="#" class="share-btn"><i class='bx bxs-share-alt'></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="eg-card c-feature-card1 wow animate fadeInDown" data-wow-duration="1.5s" data-wow-delay=".8s">
-                                <div class="auction-img">
-                                    <img alt="image" src="assets/images/bg/umcoming4.png" >
-                                    <div class="auction-timer2 gap-lg-3 gap-md-2 gap-1" id="timer10">
-                                        <div class="countdown-single">
-                                            <h5 id="days10">7</h5>
-                                            <span>Days</span>
-                                        </div>
-                                        <div class="countdown-single">
-                                            <h5 id="hours10">05</h5>
-                                            <span>Hours</span>
-                                        </div>
-                                        <div class="countdown-single">
-                                            <h5 id="minutes10">56</h5>
-                                            <span>Mins</span>
-                                        </div>
-                                        <div class="countdown-single">
-                                            <h5 id="seconds10">08</h5>
-                                            <span>Secs</span>
-                                        </div>
-                                    </div>
-                                    <div class="author-area2">
-                                        <div class="author-name">
-                                            <span>by @robatfox</span>
-                                        </div>
-                                        <div class="author-emo">
-                                            <img alt="image" src="assets/images/bg/upcoming-author1.png" >
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="c-feature-content">
-                                    <div class="c-feature-category">Test Watch</div>
-                                    <a href="auction-details.html">
-                                        <h4>Microlab Amazing Head-phone With Adapter</h4>
-                                    </a>
-                                    <p>Bidding Price : <span>$15.99</span></p>
-                                    <div class="auction-card-bttm">
-                                        <a href="auction-details.html" class="eg-btn btn--primary btn--sm">View
-                                            Details</a>
-                                        <div class="share-area">
-                                            <ul class="social-icons d-flex">
-                                                <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
-                                                <li><a href="https://www.twitter.com/"><i class="bx bxl-twitter"></i></a></li>
-                                                <li><a href="https://www.pinterest.com/"><i class="bx bxl-pinterest"></i></a></li>
-                                                <li><a href="https://www.instagram.com/"><i class="bx bxl-instagram"></i></a></li>
-                                            </ul>
-                                            <div>
-                                                <a href="#" class="share-btn"><i class='bx bxs-share-alt'></i></a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
                 <div class="slider-bottom d-flex justify-content-between align-items-center">
@@ -925,201 +558,201 @@
 
     <!-- =============== testimonial-section start =============== -->
 
-    <div class="testimonial-section pt-80 pb-80">
-        <img alt="image" src="assets/images/bg/client-right.png" class="client-right-vector" >
-        <img alt="image" src="assets/images/bg/client-left.png" class="client-left-vector" >
-        <img alt="image" src="assets/images/bg/clent-circle1.png" class="client-circle1" >
-        <img alt="image" src="assets/images/bg/clent-circle2.png" class="client-circle2" >
-        <img alt="image" src="assets/images/bg/clent-circle3.png" class="client-circle3" >
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">
-                    <div class="section-title1">
-                        <h2>What Client Say</h2>
-                        <p class="mb-0">Explore on the world's best & largest Bidding marketplace with our beautiful Bidding
-                            products. We want to be a part of your smile, success and future growth.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row justify-content-center position-relative">
-                <div class="swiper testimonial-slider">
-                    <div class="swiper-wrapper">
-                        <div class="swiper-slide">
-                            <div class="testimonial-single hover-border1 wow fadeInDown"  data-wow-duration="1.5s" data-wow-delay=".2s">
-                                <img alt="image" src="assets/images/icons/quote-green.svg" class="quote-icon" >
-                                <div class="testi-img">
-                                    <img alt="image" src="assets/images/bg/testi1.png" >
-                                </div>
-                                <div class="testi-content">
-                                    <p class="para">The Pacific Grove Chamber of Commerce would like to thank eLab
-                                        Communications and Mr. Will Elkadi for all the efforts  that
-                                        assisted me nicely manners.</p>
-                                    <div class="testi-designation">
-                                        <h5><a href="blog.html">Johan Martin</a></h5>
-                                        <p>CEO</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="testimonial-single hover-border1 wow fadeInDown"  data-wow-duration="1.5s" data-wow-delay=".4s">
-                                <img alt="image" src="assets/images/icons/quote-green.svg" class="quote-icon" >
-                                <div class="testi-img">
-                                    <img alt="image" src="assets/images/bg/testi2.png" >
-                                </div>
-                                <div class="testi-content">
-                                    <p class="para">Nullam cursus tempor ex. Nullam nec dui id metus consequat congue ac at est. Pellentesque blandit neque at elit tristique tincidunt.</p>
-                                    <div class="testi-designation">
-                                        <h5><a href="#">Jamie anderson</a></h5>
-                                        <p>Manager</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="swiper-slide">
-                            <div class="testimonial-single hover-border1 wow fadeInDown"  data-wow-duration="1.5s" data-wow-delay=".4s">
-                                <img alt="image" src="assets/images/icons/quote-green.svg" class="quote-icon" >
-                                <div class="testi-img">
-                                    <img alt="image" src="assets/images/bg/testi3.png" >
-                                </div>
-                                <div class="testi-content">
-                                    <p class="para">Maecenas vitae porttitor neque, ac porttitor nunc. Duis venenatis lacinia libero. Nam nec augue ut nunc vulputate tincidunt at suscipit nunc. </p>
-                                    <div class="testi-designation">
-                                        <h5><a href="#">John Peter</a></h5>
-                                        <p>Area Manager</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="slider-arrows testimonial2-arrow d-flex justify-content-between gap-3">
-                    <div class="testi-prev1 swiper-prev-arrow" tabindex="0" role="button"
-                        aria-label="Previous slide"><i class="bi bi-arrow-left"></i></div>
-                    <div class="testi-next1 swiper-next-arrow" tabindex="0" role="button"
-                        aria-label="Next slide">
-                        <i class="bi bi-arrow-right"></i></div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--    <div class="testimonial-section pt-80 pb-80">-->
+<!--        <img alt="image" src="assets/images/bg/client-right.png" class="client-right-vector" >-->
+<!--        <img alt="image" src="assets/images/bg/client-left.png" class="client-left-vector" >-->
+<!--        <img alt="image" src="assets/images/bg/clent-circle1.png" class="client-circle1" >-->
+<!--        <img alt="image" src="assets/images/bg/clent-circle2.png" class="client-circle2" >-->
+<!--        <img alt="image" src="assets/images/bg/clent-circle3.png" class="client-circle3" >-->
+<!--        <div class="container">-->
+<!--            <div class="row d-flex justify-content-center">-->
+<!--                <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">-->
+<!--                    <div class="section-title1">-->
+<!--                        <h2>What Client Say</h2>-->
+<!--                        <p class="mb-0">Explore on the world's best & largest Bidding marketplace with our beautiful Bidding-->
+<!--                            products. We want to be a part of your smile, success and future growth.</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row justify-content-center position-relative">-->
+<!--                <div class="swiper testimonial-slider">-->
+<!--                    <div class="swiper-wrapper">-->
+<!--                        <div class="swiper-slide">-->
+<!--                            <div class="testimonial-single hover-border1 wow fadeInDown"  data-wow-duration="1.5s" data-wow-delay=".2s">-->
+<!--                                <img alt="image" src="assets/images/icons/quote-green.svg" class="quote-icon" >-->
+<!--                                <div class="testi-img">-->
+<!--                                    <img alt="image" src="assets/images/bg/testi1.png" >-->
+<!--                                </div>-->
+<!--                                <div class="testi-content">-->
+<!--                                    <p class="para">The Pacific Grove Chamber of Commerce would like to thank eLab-->
+<!--                                        Communications and Mr. Will Elkadi for all the efforts  that-->
+<!--                                        assisted me nicely manners.</p>-->
+<!--                                    <div class="testi-designation">-->
+<!--                                        <h5><a href="blog.html">Johan Martin</a></h5>-->
+<!--                                        <p>CEO</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="swiper-slide">-->
+<!--                            <div class="testimonial-single hover-border1 wow fadeInDown"  data-wow-duration="1.5s" data-wow-delay=".4s">-->
+<!--                                <img alt="image" src="assets/images/icons/quote-green.svg" class="quote-icon" >-->
+<!--                                <div class="testi-img">-->
+<!--                                    <img alt="image" src="assets/images/bg/testi2.png" >-->
+<!--                                </div>-->
+<!--                                <div class="testi-content">-->
+<!--                                    <p class="para">Nullam cursus tempor ex. Nullam nec dui id metus consequat congue ac at est. Pellentesque blandit neque at elit tristique tincidunt.</p>-->
+<!--                                    <div class="testi-designation">-->
+<!--                                        <h5><a href="#">Jamie anderson</a></h5>-->
+<!--                                        <p>Manager</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="swiper-slide">-->
+<!--                            <div class="testimonial-single hover-border1 wow fadeInDown"  data-wow-duration="1.5s" data-wow-delay=".4s">-->
+<!--                                <img alt="image" src="assets/images/icons/quote-green.svg" class="quote-icon" >-->
+<!--                                <div class="testi-img">-->
+<!--                                    <img alt="image" src="assets/images/bg/testi3.png" >-->
+<!--                                </div>-->
+<!--                                <div class="testi-content">-->
+<!--                                    <p class="para">Maecenas vitae porttitor neque, ac porttitor nunc. Duis venenatis lacinia libero. Nam nec augue ut nunc vulputate tincidunt at suscipit nunc. </p>-->
+<!--                                    <div class="testi-designation">-->
+<!--                                        <h5><a href="#">John Peter</a></h5>-->
+<!--                                        <p>Area Manager</p>-->
+<!--                                    </div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="slider-arrows testimonial2-arrow d-flex justify-content-between gap-3">-->
+<!--                    <div class="testi-prev1 swiper-prev-arrow" tabindex="0" role="button"-->
+<!--                        aria-label="Previous slide"><i class="bi bi-arrow-left"></i></div>-->
+<!--                    <div class="testi-next1 swiper-next-arrow" tabindex="0" role="button"-->
+<!--                        aria-label="Next slide">-->
+<!--                        <i class="bi bi-arrow-right"></i></div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <!-- =============== testimonial-section end =============== -->
 
     <!-- =============== sponsor-section start =============== -->
 
-    <div class="sponsor-section style-1 pb-4">
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">
-                    <div class="section-title1">
-                        <h2>Trusted By 500+ Businesses.</h2>
-                        <p class="mb-0">Explore on the world's best & largest Bidding marketplace with our beautiful Bidding
-                            products. We want to be a part of your smile, success and future growth.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="slick-wrapper wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.2s">
-                    <div id="slick1">
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor1.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor2.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor3.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor4.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor5.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor6.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor7.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor8.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor9.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor1.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor3.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor5.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor8.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor6.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor7.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor8.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor1.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor2.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor9.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor8.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor9.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor1.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor3.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor5.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor8.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor6.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor7.png" ></div>
-                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor8.png" ></div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--    <div class="sponsor-section style-1 pb-4">-->
+<!--        <div class="container">-->
+<!--            <div class="row d-flex justify-content-center">-->
+<!--                <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">-->
+<!--                    <div class="section-title1">-->
+<!--                        <h2>Trusted By 500+ Businesses.</h2>-->
+<!--                        <p class="mb-0">Explore on the world's best & largest Bidding marketplace with our beautiful Bidding-->
+<!--                            products. We want to be a part of your smile, success and future growth.</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row">-->
+<!--                <div class="slick-wrapper wow fadeInUp" data-wow-duration="1.5s" data-wow-delay="0.2s">-->
+<!--                    <div id="slick1">-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor1.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor2.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor3.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor4.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor5.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor6.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor7.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor8.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor9.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor1.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor3.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor5.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor8.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor6.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor7.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor8.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor1.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor2.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor9.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor8.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor9.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor1.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor3.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor5.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor8.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor6.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor7.png" ></div>-->
+<!--                        <div class="slide-item"><img alt="image" src="assets/images/bg/sponsor8.png" ></div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
     <!-- =============== sponsor-section end =============== -->
 
     <!-- =============== recent-news-section start =============== -->
 
-    <div class="recent-news-section pt-120 pb-120">
-        <img alt="image" src="assets/images/bg/section-bg.png" class="img-fluid section-bg" >
-        <img alt="image" src="assets/images/icons/dot-circle.svg" class="dot-circle" >
-        <div class="container">
-            <div class="row d-flex justify-content-center">
-                <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">
-                    <div class="section-title1">
-                        <h2>Our Recent News</h2>
-                        <p class="mb-0">Explore on the world's best & largest Bidding marketplace with our beautiful Bidding
-                            products. We want to be a part of your smile, success and future growth.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row d-flex justify-content-center g-4">
-                <div class="col-md-6 col-sm-10">
-                    <div class="single-blog-style1 wow animate fadeInDown" data-wow-duration="1.5s" data-wow-delay="0.2s">
-                        <div class="blog-img">
-                            <a href="#" class="blog-date"><i class="bi bi-calendar-check"></i>Jan 30, 2022</a>
-                            <img alt="image" src="assets/images/blog/blogstyle11.png" >
-                        </div>
-                        <div class="blog-content">
-                            <h5><a href="blog-details.html">David Droga Still Has Faith in Online Advertising Creative
-                                    Digital Reviews</a></h5>
-                            <div class="blog-meta">
-                                <div class="author">
-                                    <img alt="image" src="assets/images/blog/author1.png" >
-                                    <a href="blog.html" class="author-name">Johan Martin</a>
-                                </div>
-                                <div class="comment">
-                                    <img alt="image" src="assets/images/icons/comment-icon.svg" >
-                                    <a href="#" class="comment">05 Comments</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6 col-sm-10">
-                    <div class="single-blog-style1 wow animate fadeInDown" data-wow-duration="1.5s" data-wow-delay="0.4s">
-                        <div class="blog-img">
-                            <a href="#" class="blog-date"><i class="bi bi-calendar-check"></i>May 30, 2022</a>
-                            <img alt="image" src="assets/images/blog/blogstyle12.png" >
-                        </div>
-                        <div class="blog-content">
-                            <h5><a href="blog-details.html">Take our friend Johnny No-Job, for example. He’s a
-                                    specialist in influencer.</a></h5>
-                            <div class="blog-meta">
-                                <div class="author">
-                                    <img alt="image" src="assets/images/blog/author1.png" >
-                                    <a href="blog.html" class="author-name">Johan Martin</a>
-                                </div>
-                                <div class="comment">
-                                    <img alt="image" src="assets/images/icons/comment-icon.svg" >
-                                    <a href="#" class="comment">05 Comments</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<!--    <div class="recent-news-section pt-120 pb-120">-->
+<!--        <img alt="image" src="assets/images/bg/section-bg.png" class="img-fluid section-bg" >-->
+<!--        <img alt="image" src="assets/images/icons/dot-circle.svg" class="dot-circle" >-->
+<!--        <div class="container">-->
+<!--            <div class="row d-flex justify-content-center">-->
+<!--                <div class="col-sm-12 col-md-10 col-lg-8 col-xl-6">-->
+<!--                    <div class="section-title1">-->
+<!--                        <h2>Our Recent News</h2>-->
+<!--                        <p class="mb-0">Explore on the world's best & largest Bidding marketplace with our beautiful Bidding-->
+<!--                            products. We want to be a part of your smile, success and future growth.</p>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--            <div class="row d-flex justify-content-center g-4">-->
+<!--                <div class="col-md-6 col-sm-10">-->
+<!--                    <div class="single-blog-style1 wow animate fadeInDown" data-wow-duration="1.5s" data-wow-delay="0.2s">-->
+<!--                        <div class="blog-img">-->
+<!--                            <a href="#" class="blog-date"><i class="bi bi-calendar-check"></i>Jan 30, 2022</a>-->
+<!--                            <img alt="image" src="assets/images/blog/blogstyle11.png" >-->
+<!--                        </div>-->
+<!--                        <div class="blog-content">-->
+<!--                            <h5><a href="blog-details.html">David Droga Still Has Faith in Online Advertising Creative-->
+<!--                                    Digital Reviews</a></h5>-->
+<!--                            <div class="blog-meta">-->
+<!--                                <div class="author">-->
+<!--                                    <img alt="image" src="assets/images/blog/author1.png" >-->
+<!--                                    <a href="blog.html" class="author-name">Johan Martin</a>-->
+<!--                                </div>-->
+<!--                                <div class="comment">-->
+<!--                                    <img alt="image" src="assets/images/icons/comment-icon.svg" >-->
+<!--                                    <a href="#" class="comment">05 Comments</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--                <div class="col-md-6 col-sm-10">-->
+<!--                    <div class="single-blog-style1 wow animate fadeInDown" data-wow-duration="1.5s" data-wow-delay="0.4s">-->
+<!--                        <div class="blog-img">-->
+<!--                            <a href="#" class="blog-date"><i class="bi bi-calendar-check"></i>May 30, 2022</a>-->
+<!--                            <img alt="image" src="assets/images/blog/blogstyle12.png" >-->
+<!--                        </div>-->
+<!--                        <div class="blog-content">-->
+<!--                            <h5><a href="blog-details.html">Take our friend Johnny No-Job, for example. He’s a-->
+<!--                                    specialist in influencer.</a></h5>-->
+<!--                            <div class="blog-meta">-->
+<!--                                <div class="author">-->
+<!--                                    <img alt="image" src="assets/images/blog/author1.png" >-->
+<!--                                    <a href="blog.html" class="author-name">Johan Martin</a>-->
+<!--                                </div>-->
+<!--                                <div class="comment">-->
+<!--                                    <img alt="image" src="assets/images/icons/comment-icon.svg" >-->
+<!--                                    <a href="#" class="comment">05 Comments</a>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <!-- =============== recent-news-section end =============== -->
 
@@ -1169,6 +802,71 @@
   </div>
 
     <!-- =============== counter-section end =============== -->
+<script>
 
+var selected_date = new Date("2022\u002D12\u002D23 12:00:00+00:00")
+console.log(selected_date)
+
+
+// timer end
+
+    // count-down-timer
+<!--    var setEndDate1 = "2022\u002D12\u002D23 12:00:00+00:00";-->
+
+
+
+
+    function startCountDownDate(dateVal) {
+      var countDownDate = new Date(dateVal).getTime();
+
+      return countDownDate;
+    }
+
+    function countDownTimer(start, targetDOM) {
+      // Get todays date and time
+      var now = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var distance = start - now;
+
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // add 0 at the beginning if days, hours, minutes, seconds values are less than 10
+      days = (days < 10) ? "0" + days : days;
+      hours = (hours < 10) ? "0" + hours : hours;
+      minutes = (minutes < 10) ? "0" + minutes : minutes;
+      seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+      // Output the result in an element with countdown-timer-x"
+      var el_up = document.getElementById(targetDOM);
+      if(el_up){
+      if(days=="00"){
+       document.querySelector("#" + targetDOM).textContent = hours + "H : " + minutes + "M : " + seconds + "S ";
+      }
+      else{
+      console.log(days)
+        document.querySelector("#" + targetDOM).textContent = days + "D : " + hours + "H : " + minutes + "M : " + seconds + "S ";
+        }
+      }
+
+
+      // If the count down is over, write some text
+      if (distance < 0) {
+        clearInterval();
+        document.querySelector("#" + targetDOM).textContent = "EXPIRED";
+      }
+    }
+{% for item in items %}
+
+
+
+    setInterval(function(){ countDownTimer(startCountDownDate("{{item.end_date|escapejs}}"), "timer{{item.id}}"); }, 1000);
+{%endfor%}
+
+</script>
 
 {% endblock %}

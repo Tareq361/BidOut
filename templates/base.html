@@ -43,23 +43,25 @@
 
     <!-- style css -->
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+
 </head>
 
 <body>
     <!-- preloader -->
-    <div class="preloader">
-        <div class="loader">
-            <span></span>
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </div>
+<!--    <div class="preloader">-->
+<!--        <div class="loader">-->
+<!--            <span></span>-->
+<!--            <span></span>-->
+<!--            <span></span>-->
+<!--            <span></span>-->
+<!--        </div>-->
+<!--    </div>-->
 
     <!-- scroll-btn -->
-    <!-- <div class="scroll-btn">
-        <i class='bx bxs-up-arrow-circle'></i>
-    </div> -->
+<!--    <div class="scroll-btn">-->
+<!--        <i class='bx bxs-up-arrow-circle'></i>-->
+<!--    </div>-->
 
      <!-- =============== search-area start =============== -->
 
@@ -133,30 +135,7 @@
                 </div>
             </div>
             <ul class="menu-list">
-                <li class="menu-item-has-children">
-                    <a href="#" class="drop-down">Home</a><i class='bx bx-plus dropdown-icon'></i>
-                    <ul class="submenu">
-                        <li><a href="index.html">Home 1</a></li>
-                        <li><a href="index2.html">Home 2</a></li>
-                        <li><a href="index3.html">Home 3</a></li>
-                    </ul>
-                </li>
-                <li>
-                    <a href="about.html">About Us</a>
-                </li>
-                <li>
-                    <a href="how-works.html">How It Works</a>
-                </li>
-                <li>
-                    <a href="live-auction.html">Browse Product</a>
-                </li>
-                <li class="menu-item-has-children">
-                    <a href="#">News</a><i class='bx bx-plus dropdown-icon'></i>
-                    <ul class="submenu">
-                        <li><a href="blog.html">Blog</a></li>
-                        <li><a href="blog-details.html">Blog Details</a></li>
-                    </ul>
-                </li>
+
                 <li class="menu-item-has-children">
                     <a href="#" class="drop-down">Pages</a><i class='bx bx-plus dropdown-icon'></i>
                     <ul class="submenu">
@@ -169,6 +148,24 @@
                     </ul>
                 </li>
                 <li><a href="contact.html">Contact</a></li>
+                {% if user.is_authenticated %}
+                      <li class="menu-item-has-children">
+
+                    <a href="#" class="drop-down">{{user.username}}</a><i class='bx bx-plus dropdown-icon'></i>
+
+                    <ul class="submenu">
+
+                        <li><a href="dashboard.html">Dashboard</a></li>
+                        <li><a href="login.html">Sign out</a></li>
+
+                    </ul>
+                </li>
+                {%endif%}
+
+                 <li>
+                     <a href="{% url 'Main:Login' %}" >Login</a>
+
+                 </li>
             </ul>
             <!-- mobile-search-area -->
             <div class="d-lg-none d-block">
@@ -178,30 +175,33 @@
                         <button type="submit" class="eg-btn btn--primary btn--sm">Search</button>
                     </div>
                 </form>
-                <div class="hotline two">
-                    <div class="hotline-info">
-                        <span>Click To Call</span>
-                        <h6><a href="tel:347-274-8816">+347-274-8816</a></h6>
-                    </div>
-                </div>
+
             </div>
+
         </div>
-        <div class="nav-right d-flex align-items-center">
-            <div class="hotline d-xxl-flex d-none">
-                <div class="hotline-icon">
-                    <img alt="image" src="assets/images/icons/header-phone.svg" >
-                </div>
-                <div class="hotline-info">
-                    <span>Click To Call</span>
-                    <h6><a href="tel:347-274-8816">+347-274-8816</a></h6>
-                </div>
-            </div>
+        <div class="nav-right d-flex align-items-center justify-content-between">
+
             <div class="search-btn">
                 <i class="bi bi-search"></i>
             </div>
+
+  {% if user.is_authenticated %}
              <div class="eg-btn btn--primary header-btn">
-                <a href="{% url 'Guser:Signup' %}">Register</a>
+                <a href="{{guser.get_absolute_url_dashboard}}">Dashboard</a>
+
             </div>
+              <div class="eg-btn btn-- header-btn" style="margin-left:15px;background-color:red">
+                 <a href="{% url 'Main:Logout' %}"  >Logout</a>
+            </div>
+            {%else%}
+                <div class="eg-btn btn--primary header-btn">
+                <a href="{% url 'Guser:Signup' %}">Register</a>
+
+            </div>
+              <div class="eg-btn btn--primary header-btn" style="margin-left:15px">
+                 <a href="{% url 'Main:Login' %}"  >Login</a>
+            </div>
+             {%endif%}
             <div class="mobile-menu-btn d-lg-none d-block">
                 <i class='bx bx-menu'></i>
             </div>
@@ -305,9 +305,7 @@
             <div class="container">
                 <div class="row d-flex align-items-center g-4">
                     <div class="col-lg-6 d-flex justify-content-lg-start justify-content-center">
-                        <p>Copyright 2022 <a href="#">Bid Out</a> | Design By <a
-                                href="https://www.egenslab.com/"
-                                class="egns-lab">Egens Lab</a></p>
+                        <p>Copyright 2022 <a href="#">GrowExo</a>
                     </div>
                     <div
                         class="col-lg-6 d-flex justify-content-lg-end justify-content-center align-items-center flex-sm-nowrap flex-wrap">

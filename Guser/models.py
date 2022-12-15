@@ -24,7 +24,16 @@ class GUser(models.Model):
             return True
 
         return False
+    def user_exist(userName,password):
+        if User.objects.filter(username=userName,password=password).exists():
+            return True
 
+        return False
+    def get_user(username,password):
+        if User.objects.filter(username=username,password=password).exists():
+            return User.objects.get(username=username,password=password)
+
+        return False
     def phoneNo_exists(pno):
         if GUser.objects.filter(phoneNumber=pno).exists():
             return True
@@ -51,3 +60,6 @@ class GUser(models.Model):
         return guser
     def get_absolute_url(self):
         return reverse("Guser:Active", kwargs={"slug": self.slug})
+
+    def get_absolute_url_dashboard(self):
+        return reverse("dashboard:mydashboard", kwargs={"slug": self.slug})
