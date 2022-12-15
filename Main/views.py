@@ -13,9 +13,7 @@ def Home(request):
     context={}
     if request.user.is_authenticated:
         context['guser']=GUser.check_user(request.user)
-
-    items=Item.objects.all().filter(status='Active');
-    print(items)
+    items=Item.get_active_item(request);
     context['items']=items
     return render(request,"home.html",context)
 

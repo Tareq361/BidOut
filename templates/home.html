@@ -435,10 +435,10 @@
 <!--                            </div>-->
                         </div>
                         <div class="auction-content">
-                            <h4><a href="auction-details.html">{{item.productName}}</a></h4>
-                            <p>Bidding Price : <span><span>BDT{{item.base_price}}</span></span></p>
+                            <h4><a href="{{item.get_absolute_url}}">{{item.productName}}</a></h4>
+                            <p>Bidding Price : <span><span>&#2547;{{item.base_price}}</span></span></p>
                             <div class="auction-card-bttm">
-                                <a href="auction-details.html" class="eg-btn btn--primary btn--sm">Place a Bid</a>
+                                <a href="{{item.get_absolute_url}}" class="eg-btn btn--primary btn--sm">Place a Bid</a>
                                 <div class="share-area">
                                     <ul class="social-icons d-flex">
                                         <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
@@ -460,7 +460,7 @@
             </div>
             <div class="row d-flex justify-content-center">
                 <div class="col-md-4 text-center">
-                    <a href="live-auction.html" class="eg-btn btn--primary btn--md mx-auto">View All</a>
+                    <a href="{% url 'Auction:auction' %}" class="eg-btn btn--primary btn--md mx-auto">View All</a>
                 </div>
             </div>
         </div>

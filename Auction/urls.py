@@ -14,16 +14,13 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.conf.urls.static import static
-from django.contrib import admin
+
 from django.urls import path, include
 
-from GrowexoAuction import settings
-
+from Auction import views
+app_name="Auction"
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('', include('Main.urls')),
-    path('', include('Guser.urls')),
-    path('', include('dashboard.urls')),
-    path('', include('Item.urls')),
-    path('', include('Auction.urls')),
-]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+path('live-auction/',views.AuctionListView.as_view(),name="auction"),
+path('auction-details/<slug:slug>',views.AuctionDetailsView.as_view(),name="auction_details"),
+]

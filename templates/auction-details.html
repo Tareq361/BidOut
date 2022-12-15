@@ -1,0 +1,237 @@
+{% extends 'base.html' %}
+{% block body %}
+
+{% load static %}
+
+    <div class="inner-banner">
+        <div class="container">
+            <h2 class="inner-banner-title  wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay=".4s">Auction Details</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Auction Details</li>
+                </ol>
+              </nav>
+        </div>
+    </div>
+
+    <!-- ========== inner-page-banner end ============= -->
+
+    <!-- ========== auction-details start ============= -->
+
+    <div class="auction-details-section pt-120">
+        <img alt="image" src="assets/images/bg/section-bg.png" class="img-fluid section-bg-top" >
+        <img alt="image" src="assets/images/bg/section-bg.png" class="img-fluid section-bg-bottom" >
+        <div class="container">
+            <div class="row g-4 mb-50">
+                <div class="col-xl-6 col-lg-7 d-flex flex-row align-items-start justify-content-lg-start justify-content-center flex-md-nowrap flex-wrap gap-4">
+                    <ul class="nav small-image-list d-flex flex-md-column flex-row justify-content-center gap-4  wow fadeInDown"  data-wow-duration="1.5s" data-wow-delay=".4s">
+
+                       {%for image in item.get_images%}
+                        <li class="nav-item">
+                            <div  id="details-img{{image.id}}" data-bs-toggle="pill" data-bs-target="#gallery-img{{image.id}}" aria-controls="gallery-img{{image.id}}">
+                                <img alt="image" src="{{image.image.url}}" class="img-fluid" >
+                            </div>
+                        </li>
+                    {%endfor%}
+                    </ul>
+                    <div class="tab-content mb-4 d-flex justify-content-lg-start justify-content-center  wow fadeInUp"  data-wow-duration="1.5s" data-wow-delay=".4s">
+                        {%for image in item.get_images%}
+                        <div class="tab-pane big-image fade show {%if forloop.first%} active {%endif%} " id="gallery-img{{image.id}}">
+                            <div class="auction-gallery-timer d-flex align-items-center justify-content-center flex-wrap">
+                                <h3 id="countdown-timer-{{image.id}}">&nbsp;</h3>
+                            </div>
+                            <img alt="image" src="{{image.image.url}}" class="img-fluid" >
+                        </div>
+                      {%endfor%}
+                    </div>
+                </div>
+                <div class="col-xl-6 col-lg-5">
+                    <div class="product-details-right  wow fadeInDown"  data-wow-duration="1.5s" data-wow-delay=".2s">
+                        <h3>{{item.productName}}</h3>
+                        <p class="para">{{item.description}}</p>
+                        <h4>Bidding Price: <span>&#2547;{{item.buying_price}}</span></h4>
+                        <div class="bid-form">
+                            <div class="form-title">
+                                <h5>Bid Now</h5>
+                                <p>Bid Amount : Minimum Bid &#2547;{{item.base_price}}</p>
+                            </div>
+                            <form>
+                                <div class="form-inner gap-2">
+                                    <input type="text" placeholder="BDT00.00">
+                                    <button class="eg-btn btn--primary btn--sm" type="submit">Place Bid</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row d-flex justify-content-center g-4">
+                <div class="col-lg-8">
+                    <ul class="nav nav-pills d-flex flex-row justify-content-start gap-sm-4 gap-3 mb-45 wow fadeInDown" data-wow-duration="1.5s" data-wow-delay=".2s" id="pills-tab" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active details-tab-btn" id="pills-home-tab" data-bs-toggle="pill" data-bs-target="#pills-home" type="button" role="tab" aria-controls="pills-home" aria-selected="true">Description</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link details-tab-btn" id="pills-bid-tab" data-bs-toggle="pill" data-bs-target="#pills-bid" type="button" role="tab" aria-controls="pills-bid" aria-selected="false">Biding History</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link details-tab-btn" id="pills-contact-tab" data-bs-toggle="pill" data-bs-target="#pills-contact" type="button" role="tab" aria-controls="pills-contact" aria-selected="false">Other Auction</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content" id="pills-tabContent">
+                        <div class="tab-pane fade show active wow fadeInUp"  data-wow-duration="1.5s" data-wow-delay=".2s" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+                            <div class="describe-content">
+                                <h4 >{{item.productName}}</h4>
+                                <p class="para">{{item.description}}</p>
+<!--                                <ul class="describe-list">-->
+<!--                                    <li><a href="#">Amet consectetur adipisicing elit. Maxime reprehenderit quaerat, velit rem atque vel impedit!  Expensive Design.</a></li>-->
+<!--                                    <li><a href="#">Consectetur adipisicing elit. Maxime reprehenderit quaerat</a></li>-->
+<!--                                    <li><a href="#">Fuga magni veritatis ad temporibus atque adipisci nisi rerum...</a></li>-->
+<!--                                </ul>-->
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-bid" role="tabpanel" aria-labelledby="pills-bid-tab">
+                            <div class="bid-list-area">
+                                <ul class="bid-list">
+                                    {%for buser in item.get_bid_user%}
+                                    <li {%if forloop.first%} style="background-color: #32c36c;" class="rounded" {%endif%}>
+                                        <div class="row d-flex align-items-center">
+                                            <div class="col-7">
+                                                <div class="bidder-area">
+                                                    <div class="bidder-img">
+                                                        <i class="bi bi-person-fill"></i>
+                                                    </div>
+                                                    <div class="bidder-content">
+                                                        <a><h6 {%if forloop.first%} style="color: rgb(0,0,0)" {%endif%}>{{buser.bidUser.user.username}}</h6></a>
+                                                        <p {%if forloop.first%} style="color: rgb(0,0,0)" {%endif%}>&#2547;{{buser.bid_price}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-5 text-end">
+                                                {%if forloop.first%} <h6 style="color: rgb(0,0,0)">Highest Bidder</h6>{%endif%}
+                                                <div class="bid-time">
+                                                    <p>{%if forloop.first%} <h6 style="color: #000000">{{buser.created_date|timesince}} ago</h6>{%else%} {{buser.created_date|timesince}} ago{%endif%}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    {%endfor%}
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tab-pane fade" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+                            <div class="row d-flex justify-content-center g-4">
+                                <div class="col-lg-6 col-md-4 col-sm-10">
+                                    <div class="eg-card auction-card1">
+                                        <div class="auction-img">
+                                            <img alt="image" src="assets/images/bg/live-auc1.png" >
+                                            <div class="auction-timer">
+                                                <div class="countdown" id="timer1">
+                                                    <h4><span id="hours1">05</span>H : <span id="minutes1">52</span>M : <span
+                                                            id="seconds1">32</span>S</h4>
+                                                </div>
+                                            </div>
+                                            <div class="author-area">
+                                                <div class="author-emo">
+                                                    <img alt="image" src="assets/images/icons/smile-emo.svg" >
+                                                </div>
+                                                <div class="author-name">
+                                                    <span>by @robatfox</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="auction-content">
+                                            <h4><a href="auction-details.html">Brand New royal Enfield 250 CC For Sale</a></h4>
+                                            <p>Bidding Price : <span>$85.9</span> </p>
+                                            <div class="auction-card-bttm">
+                                                <a href="auction-details.html" class="eg-btn btn--primary btn--sm">Place a Bid</a>
+                                                <div class="share-area">
+                                                    <ul class="social-icons d-flex">
+                                                        <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
+                                                        <li><a href="https://www.twitter.com/"><i class="bx bxl-twitter"></i></a></li>
+                                                        <li><a href="https://www.pinterest.com/"><i class="bx bxl-pinterest"></i></a></li>
+                                                        <li><a href="https://www.instagram.com/"><i class="bx bxl-instagram"></i></a></li>
+                                                    </ul>
+                                                    <div>
+                                                        <a href="#" class="share-btn"><i class='bx bxs-share-alt'></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4">
+                    <div class="blog-sidebar">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+<script>
+
+       function startCountDownDate(dateVal) {
+      var countDownDate = new Date(dateVal).getTime();
+
+      return countDownDate;
+    }
+
+    function countDownTimer(start, targetDOM) {
+      // Get todays date and time
+      var now = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var distance = start - now;
+
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // add 0 at the beginning if days, hours, minutes, seconds values are less than 10
+      days = (days < 10) ? "0" + days : days;
+      hours = (hours < 10) ? "0" + hours : hours;
+      minutes = (minutes < 10) ? "0" + minutes : minutes;
+      seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+      // Output the result in an element with countdown-timer-x"
+      var el_up = document.getElementById(targetDOM);
+      if(el_up){
+      if(days=="00"){
+       document.querySelector("#" + targetDOM).textContent = hours + "H : " + minutes + "M : " + seconds + "S ";
+      }
+      else{
+      console.log(days)
+        document.querySelector("#" + targetDOM).textContent = days + "D : " + hours + "H : " + minutes + "M : " + seconds + "S ";
+        }
+      }
+
+
+      // If the count down is over, write some text
+      if (distance < 0) {
+        clearInterval();
+        document.querySelector("#" + targetDOM).textContent = "EXPIRED";
+        document.querySelector("#" + targetDOM).style.color = "red";
+      }
+    }
+{% for image in item.get_images %}
+
+
+
+    setInterval(function(){ countDownTimer(startCountDownDate("{{item.end_date|escapejs}}"), "countdown-timer-{{image.id}}"); }, 1000);
+{%endfor%}
+
+
+
+</script>
+{% endblock %}

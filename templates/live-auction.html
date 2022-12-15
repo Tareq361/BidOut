@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{% block body %}
+
+{% load static %}
+
+ <div class="inner-banner">
+        <div class="container">
+            <h2 class="inner-banner-title wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay=".2s">Live Auction</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                  <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                  <li class="breadcrumb-item active" aria-current="page">Live Auction</li>
+                </ol>
+              </nav>
+        </div>
+    </div>
+
+    <!-- ========== inner-page-banner end ============= -->
+
+    <div class="live-auction-section pt-120 pb-120">
+        <img alt="image" src="assets/images/bg/section-bg.png" class="img-fluid section-bg-top" >
+        <img alt="image" src="assets/images/bg/section-bg.png" class="img-fluid section-bg-bottom" >
+        <div class="container">
+            <div class="row gy-4 mb-60 d-flex justify-content-center">
+         {% for item in item_list %}
+                <div class="col-lg-4 col-md-6 col-sm-10 ">
+                    <div data-wow-duration="1.5s" data-wow-delay="0.2s" class="eg-card auction-card1 wow animate fadeInDown">
+                        <div class="auction-img">
+                            <img alt="image" src="{{item.get_image.url}}" >
+                            <div class="auction-timer">
+                                <div class="countdown" id="timer{{item.id}}" style="font-size:24px;font-weight:600;color: #444444;margin-bottom:0;">
+
+                                    <h4><span id="hours1">05</span>H : <span id="minutes1">52</span>M : <span id="seconds1">32</span>S</h4>
+                                </div>
+                            </div>
+<!--                            <div class="author-area">-->
+<!--                                <div class="author-emo">-->
+<!--                                    <img alt="image" src="assets/images/icons/smile-emo.svg" >-->
+<!--                                </div>-->
+<!--                                <div class="author-name">-->
+<!--                                    <span>by @robatfox</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+                        </div>
+                        <div class="auction-content">
+                            <h4><a href="{{item.get_absolute_url}}">{{item.productName}}</a></h4>
+                            <p>Bidding Price : <span><span>&#2547;{{item.base_price}}</span></span></p>
+                            <div class="auction-card-bttm">
+                                <a href="{{item.get_absolute_url}}" class="eg-btn btn--primary btn--sm">Place a Bid</a>
+                                <div class="share-area">
+                                    <ul class="social-icons d-flex">
+                                        <li><a href="https://www.facebook.com/"><i class="bx bxl-facebook"></i></a></li>
+                                        <li><a href="https://www.twitter.com/"><i class="bx bxl-twitter"></i></a></li>
+                                        <li><a href="https://www.pinterest.com/"><i class="bx bxl-pinterest"></i></a></li>
+                                        <li><a href="https://www.instagram.com/"><i class="bx bxl-instagram"></i></a></li>
+                                    </ul>
+                                    <div>
+                                        <div class="share-btn"><i class='bx bxs-share-alt'></i></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {%endfor%}
+
+
+
+
+
+
+            </div>
+            <div class="row">
+                <nav class="pagination-wrap">
+                     {%if page_obj.has_other_pages%}
+                    <ul class="pagination d-flex justify-content-center gap-md-3 gap-2">
+                                {% if page_obj.has_previous %}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.previous_page_number }}" tabindex="-1" >Prev</a>
+                      </li>
+                        {%else%}
+                          <li class="page-item disabled">
+                        <a class="page-link" href="#" tabindex="-1" >Prev</a>
+                      </li>
+                         {%endif%}
+                        	{%for n in page_obj.paginator.page_range%}
+                                    {%if page_obj.number == n%}
+                      <li class="page-item active" aria-current="page"><a class="page-link" href="">{{n}}</a></li>
+                        {%else%}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{n}}">{{n}}</a>
+                      </li>
+                        {%endif%}
+                        {%endfor%}
+                      {% if page_obj.has_next%}
+                      <li class="page-item">
+                        <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
+                      </li>
+                        {%else%}
+                            <li class="page-item disabled">
+                        <a class="page-link" href="#" >Next</a>
+                      </li>
+                        {%endif%}
+                    </ul>
+                    	{%endif%}
+                  </nav>
+
+            </div>
+        </div>
+    </div>
+
+
+<script>
+
+    function startCountDownDate(dateVal) {
+      var countDownDate = new Date(dateVal).getTime();
+
+      return countDownDate;
+    }
+
+    function countDownTimer(start, targetDOM) {
+      // Get todays date and time
+      var now = new Date().getTime();
+
+      // Find the distance between now and the count down date
+      var distance = start - now;
+
+      // Time calculations for days, hours, minutes and seconds
+      var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      // add 0 at the beginning if days, hours, minutes, seconds values are less than 10
+      days = (days < 10) ? "0" + days : days;
+      hours = (hours < 10) ? "0" + hours : hours;
+      minutes = (minutes < 10) ? "0" + minutes : minutes;
+      seconds = (seconds < 10) ? "0" + seconds : seconds;
+
+      // Output the result in an element with countdown-timer-x"
+      var el_up = document.getElementById(targetDOM);
+      if(el_up){
+      if(days=="00"){
+       document.querySelector("#" + targetDOM).textContent = hours + "H : " + minutes + "M : " + seconds + "S ";
+      }
+      else{
+      console.log(days)
+        document.querySelector("#" + targetDOM).textContent = days + "D : " + hours + "H : " + minutes + "M : " + seconds + "S ";
+        }
+      }
+
+
+      // If the count down is over, write some text
+      if (distance < 0) {
+        clearInterval();
+        document.querySelector("#" + targetDOM).textContent = "EXPIRED";
+        document.querySelector("#" + targetDOM).style.color = "red";
+      }
+    }
+{% for item in item_list %}
+
+
+
+    setInterval(function(){ countDownTimer(startCountDownDate("{{item.end_date|escapejs}}"), "timer{{item.id}}"); }, 1000);
+{%endfor%}
+
+
+</script>
+{% endblock %}
