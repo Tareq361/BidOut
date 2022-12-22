@@ -49,7 +49,7 @@
                 <div class="col-xl-6 col-lg-5">
                     <div class="product-details-right  wow fadeInDown"  data-wow-duration="1.5s" data-wow-delay=".2s">
                         <h3>{{item.productName}}</h3>
-                        <p class="para">{{item.description}}</p>
+<!--                        <p class="para">{{item.description}}</p>-->
                         <h4>Bidding Price: <span>&#2547;{{item.buying_price}}</span></h4>
                         <div class="bid-form">
                             <div class="form-title">
@@ -83,7 +83,7 @@
                         <div class="tab-pane fade show active wow fadeInUp"  data-wow-duration="1.5s" data-wow-delay=".2s" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
                             <div class="describe-content">
                                 <h4 >{{item.productName}}</h4>
-                                <p class="para">{{item.description}}</p>
+                                {{item.description|safe}}
 <!--                                <ul class="describe-list">-->
 <!--                                    <li><a href="#">Amet consectetur adipisicing elit. Maxime reprehenderit quaerat, velit rem atque vel impedit!  Expensive Design.</a></li>-->
 <!--                                    <li><a href="#">Consectetur adipisicing elit. Maxime reprehenderit quaerat</a></li>-->

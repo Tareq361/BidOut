@@ -45,6 +45,7 @@
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
 
 
+
 </head>
 
 <body>
@@ -155,8 +156,8 @@
 
                     <ul class="submenu">
 
-                        <li><a href="dashboard.html">Dashboard</a></li>
-                        <li><a href="login.html">Sign out</a></li>
+                        <li><a href="{{user.guser.get_absolute_url_dashboard}}">Dashboard</a></li>
+                        <li><a href="{% url 'Main:Logout' %}">Sign out</a></li>
 
                     </ul>
                 </li>
@@ -187,7 +188,7 @@
 
   {% if user.is_authenticated %}
              <div class="eg-btn btn--primary header-btn">
-                <a href="{{guser.get_absolute_url_dashboard}}">Dashboard</a>
+                <a href="{{user.guser.get_absolute_url_dashboard}}">Dashboard</a>
 
             </div>
               <div class="eg-btn btn-- header-btn" style="margin-left:15px;background-color:red">
@@ -337,6 +338,7 @@
     <script src="{% static 'js/viewport.jquery.js' %}"></script>
     <script src="{% static 'js/jquery.magnific-popup.min.js' %}"></script>
     <script src="{% static 'js/main.js' %}"></script>
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
 </body>
 

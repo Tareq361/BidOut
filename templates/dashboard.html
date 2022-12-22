@@ -283,7 +283,8 @@
                             aria-labelledby="v-pills-order-tab">
                             <!-- table title-->
                             <div class="table-title-area">
-                                <h3>Order Bidding List</h3>
+                                <h3>My Item List</h3>
+
                                 <select>
                                     <option value="01">Show: Last 05 Order</option>
                                     <option value="02">Show: Last 03 Order</option>
@@ -291,6 +292,7 @@
                                     <option value="04">Show: Last 20 Order</option>
                                 </select>
                             </div>
+                             <a href="{% url 'dashboard:postItem' %}" class="btn--primary3-outline rounded btn--md">Post Item</a>
 
                             <!-- table -->
                             <div class="table-wrapper">
@@ -299,93 +301,25 @@
                                         <tr>
                                             <th>Image</th>
                                             <th>Bidding ID</th>
-                                            <th>Bid Amount(USD)</th>
+                                            <th>Bid Amount(BDT)</th>
                                             <th>Highest Bid</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                    {% for item in user_item.get_own_item%}
                                         <tr>
-                                            <td data-label="Image"><img alt="image" src="assets/images/bg/order1.png" class="img-fluid" ></td>
-                                            <td data-label="Bidding ID">Bidding_HvO253gT</td>
-                                            <td data-label="Bid Amount(USD)">1222.8955</td>
-                                            <td data-label="Highest Bid">$1222.8955</td>
-                                            <td data-label="Status" class="text-green">Approved</td>
-                                            <td data-label="Action"><button class="eg-btn action-btn green"><img alt="image" src="assets/images/icons/aiction-icon.svg" ></button></td>
+                                            <td data-label="Image"><img alt="image" src="{{item.get_image.url}}" class="img-fluid" ></td>
+                                            <td data-label="Bidding ID">Bidding_Hv{{item.id}}</td>
+                                            <td data-label="Bid Amount(USD)">{{item.base_price}}</td>
+                                            <td data-label="Highest Bid">{{item.get_bid_higest.bid_price}}</td>
+                                            <td data-label="Status" class="text-green">{{item.status}}</td>
+                                                  <td> <a  class="btn btn-outline-success card-link" style="margin: 10px"><i class="bi bi-chat-left-quote-fill"></i></a>
+                                                    <a href="{{item.get_absolute_url}}" class="btn btn-outline-primary card-link" style="margin: 10px"><i class="bi bi-info-lg"></i></a>
+<!--        <a class="btn btn-outline-danger card-link" style="margin: 10px"><i class="bi bi-trash-fill"></i></a></td>-->
                                         </tr>
-                                        <tr>
-                                            <td data-label="Image"><img alt="image" src="assets/images/bg/order2.png" class="img-fluid" ></td>
-                                            <td data-label="Bidding ID">Bidding_HvO253gT</td>
-                                            <td data-label="Bid Amount(USD)">1222.8955</td>
-                                            <td data-label="Highest Bid">$1222.8955</td>
-                                            <td data-label="Status" class="text-green">Approved</td>
-                                            <td data-label="Action"><button class="eg-btn action-btn green"><img alt="image" src="assets/images/icons/aiction-icon.svg" ></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td data-label="Image"><img alt="image" src="assets/images/bg/order3.png" class="img-fluid" ></td>
-                                            <td data-label="Bidding ID">Bidding_HvO253gT</td>
-                                            <td data-label="Bid Amount(USD)">1222.8955</td>
-                                            <td data-label="Highest Bid">$1222.8955</td>
-                                            <td data-label="Status" class="text-green">Approved</td>
-                                            <td data-label="Action"><button class="eg-btn action-btn green"><img alt="image" src="assets/images/icons/aiction-icon.svg" ></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td data-label="Image"><img alt="image" src="assets/images/bg/order4.png" class="img-fluid" ></td>
-                                            <td data-label="Bidding ID">Bidding_HvO253gT</td>
-                                            <td data-label="Bid Amount(USD)">1222.8955</td>
-                                            <td data-label="Highest Bid">$1222.8955</td>
-                                            <td data-label="Status" class="text-green">Approved</td>
-                                            <td data-label="Action"><button class="eg-btn action-btn green"><img alt="image" src="assets/images/icons/aiction-icon.svg" ></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td data-label="Image"><img alt="image" src="assets/images/bg/order1.png" class="img-fluid" ></td>
-                                            <td data-label="Bidding ID">Bidding_HvO253gT</td>
-                                            <td data-label="Bid Amount(USD)">1222.8955</td>
-                                            <td data-label="Highest Bid">$1222.8955</td>
-                                            <td data-label="Status" class="text-green">Approved</td>
-                                            <td data-label="Action"><button class="eg-btn action-btn green"><img alt="image" src="assets/images/icons/aiction-icon.svg" ></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td data-label="Image"><img alt="image" src="assets/images/bg/order1.png" class="img-fluid" ></td>
-                                            <td data-label="Bidding ID">Bidding_HvO253gT</td>
-                                            <td data-label="Bid Amount(USD)">1222.8955</td>
-                                            <td data-label="Highest Bid">$1222.8955</td>
-                                            <td data-label="Status" class="text-green">Approved</td>
-                                            <td data-label="Action"><button class="eg-btn action-btn green"><img alt="image" src="assets/images/icons/aiction-icon.svg" ></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td data-label="Image"><img alt="image" src="assets/images/bg/order2.png" ></td>
-                                            <td data-label="Bidding ID">Bidding_HvO253gT</td>
-                                            <td data-label="Bid Amount(USD)">1222.8955</td>
-                                            <td data-label="Highest Bid">$6622.8955</td>
-                                            <td data-label="Status" class="text-red">Reject</td>
-                                            <td data-label="Action"><button class="eg-btn action-btn red"><img alt="image" src="assets/images/icons/aiction-icon.svg" ></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td data-label="Image"><img alt="image" src="assets/images/bg/order3.png" ></td>
-                                            <td data-label="Bidding ID">Bidding_HvO253gT</td>
-                                            <td data-label="Bid Amount(USD)">1222.8955</td>
-                                            <td data-label="Highest Bid">$9022.8955</td>
-                                            <td data-label="Status" class="text-green">Approved</td>
-                                            <td data-label="Action"><button class="eg-btn action-btn green"><img alt="image" src="assets/images/icons/aiction-icon.svg" ></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td data-label="Image"><img alt="image" src="assets/images/bg/order4.png" ></td>
-                                            <td data-label="Bidding ID">Bidding_HvO253gT</td>
-                                            <td data-label="Bid Amount(USD)">1222.8955</td>
-                                            <td data-label="Highest Bid">$9022.8955</td>
-                                            <td data-label="Status" class="text-red">Reject</td>
-                                            <td data-label="Action"><button class="eg-btn action-btn red"><img alt="image" src="assets/images/icons/aiction-icon.svg" ></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td data-label="Image"><img alt="image" src="assets/images/bg/order5.png" ></td>
-                                            <td data-label="Bidding ID">Bidding_HvO253gT</td>
-                                            <td data-label="Bid Amount(USD)">1222.8955</td>
-                                            <td data-label="Highest Bid">$9022.8955</td>
-                                            <td data-label="Status" class="text-green">Approved</td>
-                                            <td data-label="Action"><button class="eg-btn action-btn green"><img alt="image" src="assets/images/icons/aiction-icon.svg" ></button></td>
-                                        </tr>
+                                        {%endfor%}
                                     </tbody>
                                 </table>
                             </div>

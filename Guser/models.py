@@ -4,6 +4,8 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.urls import reverse
 
+from Item.models import Item
+
 
 def custom_slugify(value):
     return slugify(value).replace(' ', '_')
@@ -58,6 +60,9 @@ class GUser(models.Model):
         guser = GUser.objects.create(user=user, otp='1234', phoneNumber=phoneNo)
 
         return guser
+    def get_own_item(self):
+
+        return Item.objects.filter(G_user=self)
     def get_absolute_url(self):
         return reverse("Guser:Active", kwargs={"slug": self.slug})
 
