@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block body %}
+
  <div class="hero-area hero-style-one">
         <div class="hero-main-wrapper position-relative">
             <div class="swiper banner1">
@@ -418,7 +419,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-10 ">
                     <div data-wow-duration="1.5s" data-wow-delay="0.2s" class="eg-card auction-card1 wow animate fadeInDown">
                         <div class="auction-img">
-                            <img alt="image" src="{{item.get_image.url}}" >
+                            <img alt="image"  style="min-height:500px;max-height: 500px" src="{{item.get_image.url}}" >
                             <div class="auction-timer">
                                 <div class="countdown" id="timer{{item.id}}" style="font-size:24px;font-weight:600;color: #444444;margin-bottom:0;">
 

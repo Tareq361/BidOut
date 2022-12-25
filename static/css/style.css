@@ -7218,7 +7218,7 @@ live-auction Page
   align-items: center;
 }
 
-.product-details-right .bid-form .form-inner input[type="text"] {
+.product-details-right .bid-form .form-inner input[type="number"] {
   width: 100%;
   border-radius: 5px;
   border: 1px solid #EEEEEE;
@@ -7226,13 +7226,13 @@ live-auction Page
   transition: all 0.42s ease;
 }
 
-.product-details-right .bid-form .form-inner input[type="text"]::placeholder {
+.product-details-right .bid-form .form-inner input[type="number"]::placeholder {
   font-size: 16px;
   font-weight: 500;
   color: #696969;
 }
 
-.product-details-right .bid-form .form-inner input[type="text"]:focus {
+.product-details-right .bid-form .form-inner input[type="number"]:focus {
   border: 1px solid #32c36c;
 }
 

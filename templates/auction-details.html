@@ -56,10 +56,15 @@
                                 <h5>Bid Now</h5>
                                 <p>Bid Amount : Minimum Bid &#2547;{{item.base_price}}</p>
                             </div>
-                            <form>
+
+                             <div class="form-title" >
+                                 <h5 id="highestBid">Current Bid: &#2547;<span id="bid_value" data-toggle="counter-up">{% if item.get_bid_higest.bid_price %}{{item.get_bid_higest.bid_price}}{%endif%}</span></h5>
+                            </div>
+
+                            <form id="form_data">
                                 <div class="form-inner gap-2">
-                                    <input type="text" placeholder="BDT00.00">
-                                    <button class="eg-btn btn--primary btn--sm" type="submit">Place Bid</button>
+                                    <input id="id_bidder_amount" type="number" placeholder="00.00" required>
+                                    <button class="eg-btn btn--primary btn--sm" id="BidButton" type="submit">Place Bid</button>
                                 </div>
                             </form>
                         </div>
@@ -211,7 +216,6 @@
        document.querySelector("#" + targetDOM).textContent = hours + "H : " + minutes + "M : " + seconds + "S ";
       }
       else{
-      console.log(days)
         document.querySelector("#" + targetDOM).textContent = days + "D : " + hours + "H : " + minutes + "M : " + seconds + "S ";
         }
       }
@@ -231,7 +235,47 @@
     setInterval(function(){ countDownTimer(startCountDownDate("{{item.end_date|escapejs}}"), "countdown-timer-{{image.id}}"); }, 1000);
 {%endfor%}
 
+//for websocket
+    const socket = new WebSocket("ws://" + window.location.host + "/ws/auction-details/" + "{{item.id}}" + "/");
+
+    var form_data = $('#form_data');
+    var bid_input = $('#id_bidder_amount');
+    var bid_holder = $('#bid_value');
 
 
+    socket.onmessage = function(e){
+        console.log("message", e)
+        bid_holder.html("&#2547;"+e.data);
+    }
+
+    socket.onopen = function(e){
+        console.log("open", e)
+        console.log(bid_holder.text())
+        form_data.submit(function(event){
+            event.preventDefault()
+            var bid_value = bid_input.val();
+            var c_value=bid_holder.text()
+            bid_input.val('')
+            bid_holder.val('')
+            console.log(bid_value)
+            console.log(c_value)
+            if (bid_value>c_value){
+            var final_data = {
+                'bid': bid_value
+            };
+            socket.send(JSON.stringify(final_data))}
+            else {
+                alert("নিলামের সর্বনিম্ন মূল্য থেকে বেশি হতে হবে")
+            }
+        })
+    }
+
+    socket.onerror = function(e){
+        console.log("error", e)
+    }
+
+    socket.onclose = function(e){
+        console.log("close", e)
+    }
 </script>
 {% endblock %}

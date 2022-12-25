@@ -7,7 +7,7 @@ from Item.models import Item
 
 class AuctionListView(ListView):
     model = Item;
-    paginate_by = 1
+    paginate_by = 9
     template_name = 'live-auction.html'
 
     def get_queryset(self):

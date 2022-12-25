@@ -46,6 +46,7 @@ def Login(request):
                 login(request, user)
                 print("user")
                 if request.POST.get('next'):
+                    print(request.POST.get('next'))
                     return redirect(request.GET.get('next'))
                 else:
                     return redirect('Main:Home')
