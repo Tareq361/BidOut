@@ -158,7 +158,7 @@
 
                     <ul class="submenu">
 
-                        <li><a href="{{user.guser.get_absolute_url_dashboard}}">Dashboard</a></li>
+                        <li><a href="{% url 'dashboard:mydashboard' %}">Dashboard</a></li>
                         <li><a href="{% url 'Main:Logout' %}">Sign out</a></li>
 
                     </ul>
@@ -190,7 +190,7 @@
 
   {% if user.is_authenticated %}
              <div class="eg-btn btn--primary header-btn">
-                <a href="{{user.guser.get_absolute_url_dashboard}}">Dashboard</a>
+                <a href="{% url 'dashboard:mydashboard' %}">Dashboard</a>
 
             </div>
               <div class="eg-btn btn-- header-btn" style="margin-left:15px;background-color:red">

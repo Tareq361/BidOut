@@ -31,13 +31,13 @@ class LiveBiddingConsumer(AsyncConsumer):
             print(user_obj)
             p_id = self.product_id
             print(p_id)
-            await self.update_bid(p_id, bid, user_obj)
+            higest_bid=await self.update_bid(p_id, bid, user_obj)
 
             await self.channel_layer.group_send(
                 self.product_id,
                 {
                     'type': 'chat_message',
-                    'text': bid
+                    'text': higest_bid
                 }
             )
 
@@ -60,5 +60,8 @@ class LiveBiddingConsumer(AsyncConsumer):
         else:
             print("new bid")
             bidding=bid_item.objects.create(item=product,bidUser=guser,bid_price=bid)
+
             bidding.save()
-            return bidding
+            higest_bid=Item.get_bid_higest(self=product)
+            print(higest_bid.bid_price)
+            return str(higest_bid.bid_price)

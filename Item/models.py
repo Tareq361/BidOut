@@ -1,4 +1,7 @@
 from django.db import models
+from django.db.models import Subquery
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from django.urls import reverse
 from django.utils import timezone
 import string
@@ -105,7 +108,15 @@ class bid_item(models.Model):
         ordering=['-created_date']
     def __str__(self):
         return self.item.productName
-
+@receiver(post_save,sender=bid_item)
+def new_bid(sender,instance,**kwargs):
+    current_bid_price = instance.bid_price
+    item = instance.item
+    subquery = bid_item.objects.filter(item=item).exclude(bidUser=instance.bidUser).filter(bid_price__lt=current_bid_price).values('bidUser').distinct()
+    from Guser.models import GUser
+    bidders = GUser.objects.filter(id__in=Subquery(subquery)).distinct()
+    for bidder in bidders:
+        print(bidder.user.username)
 class item_gallery(models.Model):
     item=models.ForeignKey(Item,on_delete=models.CASCADE,default=None)
     image=models.ImageField(upload_to='item_image/item_gallery/')

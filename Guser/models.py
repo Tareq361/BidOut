@@ -1,12 +1,16 @@
 from autoslug import AutoSlugField
 from autoslug.settings import slugify
+from django.core.mail import send_mail, EmailMessage
 from django.db import models
 from django.contrib.auth.models import User
+from django.template.loader import render_to_string
 from django.urls import reverse
 
+from GrowexoAuction import settings
 from Item.models import Item
-
-
+from django.db.models.signals import pre_save,post_save
+from django.dispatch import receiver
+from django.utils.crypto import get_random_string
 def custom_slugify(value):
     return slugify(value).replace(' ', '_')
 class GUser(models.Model):
@@ -36,20 +40,20 @@ class GUser(models.Model):
             return User.objects.get(username=username,password=password)
 
         return False
-    def phoneNo_exists(pno):
-        if GUser.objects.filter(phoneNumber=pno).exists():
+    def email_exists(email):
+        if User.objects.filter(email=email).exists():
             return True
 
         return False
-    def check_otp(slug,otp):
-        if GUser.objects.filter(slug=slug,otp=otp).exists():
-            gu=GUser.objects.get(slug=slug,otp=otp);
+    def check_otp(user,otp):
+        if GUser.objects.filter(user=user,otp=otp).exists():
+            gu=GUser.objects.get(user=user,otp=otp);
             gu.otp_active=True
             gu.save()
             return True
         return False
-    def create_user(userName,password):
-        user=User.objects.create_user(username=userName, password=password)
+    def create_user(userName,password,email):
+        user=User.objects.create_user(username=userName, password=password,email=email)
 
         return user
     def check_user(user):
@@ -57,14 +61,26 @@ class GUser(models.Model):
 
         return user
     def create_Guser(user, phoneNo):
-        guser = GUser.objects.create(user=user, otp='1234', phoneNumber=phoneNo)
+        guser = GUser.objects.create(user=user, otp=get_random_string(4, allowed_chars='0123456789'), phoneNumber=phoneNo)
+        mail_subject = "OTP for account active"
+        messsage = render_to_string('otp_mail.html', {
+            'user': user,
+            'otp': guser.otp,
+        })
 
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [user.email, ]
+        e_message = EmailMessage(mail_subject, messsage, email_from, recipient_list)
+        e_message.content_subtype = 'html'
+        e_message.send()
+        print("send activation link successfully")
         return guser
     def get_own_item(self):
 
         return Item.objects.filter(G_user=self)
     def get_absolute_url(self):
-        return reverse("Guser:Active", kwargs={"slug": self.slug})
+        return reverse("Guser:Active")
 
-    def get_absolute_url_dashboard(self):
-        return reverse("dashboard:mydashboard", kwargs={"slug": self.slug})
+# @receiver(post_save,sender=GUser)
+# def otp_for_guser(sender,instance,**kwargs):
+

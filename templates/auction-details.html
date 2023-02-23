@@ -54,7 +54,7 @@
                         <div class="bid-form">
                             <div class="form-title">
                                 <h5>Bid Now</h5>
-                                <p>Bid Amount : Minimum Bid &#2547;{{item.base_price}}</p>
+                                <p>Bid Amount : Minimum Bid &#2547;<span id="min_bid_value" data-toggle="counter-up">{{item.base_price}}</span></p>
                             </div>
 
                              <div class="form-title" >
@@ -62,10 +62,21 @@
                             </div>
 
                             <form id="form_data">
+                                {%if request.user.is_authenticated %}
+
+                                {%if request.user.GUser.otp_active == "No"%}
+                                  <h5>Please <a href="{% url 'Guser:Active' %}" class="link-primary">active your account</a> to bid</h5>
+                                {%else%}
                                 <div class="form-inner gap-2">
                                     <input id="id_bidder_amount" type="number" placeholder="00.00" required>
                                     <button class="eg-btn btn--primary btn--sm" id="BidButton" type="submit">Place Bid</button>
                                 </div>
+                                {%endif%}
+                                {%else%}
+                                 <div class="form-title" >
+                                     <h5>Please <a href="{% url 'Main:Login' %}" class="link-primary">Log in here</a> to bid</h5>
+                            </div>
+                                {%endif%}
                             </form>
                         </div>
                     </div>
@@ -241,11 +252,12 @@
     var form_data = $('#form_data');
     var bid_input = $('#id_bidder_amount');
     var bid_holder = $('#bid_value');
+    var min_val=$('#min_bid_value')
 
 
     socket.onmessage = function(e){
         console.log("message", e)
-        bid_holder.html("&#2547;"+e.data);
+        bid_holder.html(""+e.data);
     }
 
     socket.onopen = function(e){
@@ -254,12 +266,13 @@
         form_data.submit(function(event){
             event.preventDefault()
             var bid_value = bid_input.val();
-            var c_value=bid_holder.text()
+            var min_bid_value = parseInt(min_val.text());
+            var c_value=parseInt(bid_holder.text())
             bid_input.val('')
             bid_holder.val('')
             console.log(bid_value)
-            console.log(c_value)
-            if (bid_value>c_value){
+            console.log(c_value+50)
+            if (bid_value>c_value+50 && bid_value>=min_bid_value){
             var final_data = {
                 'bid': bid_value
             };

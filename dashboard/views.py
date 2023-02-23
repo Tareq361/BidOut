@@ -8,13 +8,16 @@ from Item.models import Item
 from dashboard.forms import DescForm
 
 
-@method_decorator(login_required, name='dispatch')
-class UserDashboard(DetailView):
-    model = GUser;
-    context_object_name = 'user_item'
-    template_name = "dashboard.html"
+@login_required()
+def user_dashboard(request):
 
+    guser=GUser.check_user(request.user)
 
+    context={
+        "user_item":guser,
+    }
+
+    return render(request,"dashboard.html",context)
 
 
 @login_required()

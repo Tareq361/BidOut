@@ -16,15 +16,16 @@ def Signup(request):
     if request.method == 'POST':
         userName = request.POST.get('userName')
         phoneNo = request.POST.get('phoneNo')
+        email = request.POST.get('email')
         password = request.POST.get('password')
         if GUser.username_exists(userName):
             messages.info(request, "Username Taken!!!")
             return redirect('Guser:Signup')
-        elif GUser.phoneNo_exists(phoneNo):
-            messages.info(request, "Phonenumber Exist!!!")
+        elif GUser.email_exists(email):
+            messages.info(request, "Email Exist!!!")
             return redirect('Guser:Signup')
         else:
-            user=GUser.create_user(userName,password)
+            user=GUser.create_user(userName,password,email)
             guser=GUser.create_Guser(user=user,phoneNo=phoneNo)
             login(request, user)
             return redirect(guser)
@@ -38,12 +39,10 @@ def Signup(request):
 
 @csrf_protect
 @login_required
-def Active(request,slug):
+def Active(request):
     if request.method == 'POST':
         otp = request.POST.get('otp')
-        print(slug)
-        print(otp)
-        if GUser.check_otp(slug,otp):
+        if GUser.check_otp(request.user,otp):
             return redirect('/')
         else:
             messages.info(request, "Invalid OTP")

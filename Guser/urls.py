@@ -7,5 +7,5 @@ from Guser import views
 app_name="Guser"
 urlpatterns = [
     path('SignUp', views.Signup, name='Signup'),
-    path('Active/<slug:slug>', views.Active, name='Active'),
+    path('Active', views.Active, name='Active'),
 ]
