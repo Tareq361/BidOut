@@ -5,7 +5,7 @@
 
     <div class="inner-banner">
         <div class="container">
-            <h2 class="inner-banner-title  wow fadeInLeft" data-wow-duration="1.5s" data-wow-delay=".4s">Auction Details</h2>
+            <h2 class="inner-banner-title">Auction Details</h2>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -25,7 +25,7 @@
         <div class="container">
             <div class="row g-4 mb-50">
                 <div class="col-xl-6 col-lg-7 d-flex flex-row align-items-start justify-content-lg-start justify-content-center flex-md-nowrap flex-wrap gap-4">
-                    <ul class="nav small-image-list d-flex flex-md-column flex-row justify-content-center gap-4  wow fadeInDown"  data-wow-duration="1.5s" data-wow-delay=".4s">
+                    <ul class="nav small-image-list d-flex flex-md-column flex-row justify-content-center gap-4">
 
                        {%for image in item.get_images%}
                         <li class="nav-item">
@@ -35,11 +35,11 @@
                         </li>
                     {%endfor%}
                     </ul>
-                    <div class="tab-content mb-4 d-flex justify-content-lg-start justify-content-center  wow fadeInUp"  data-wow-duration="1.5s" data-wow-delay=".4s">
+                    <div class="tab-content mb-4 d-flex justify-content-lg-start justify-content-center">
                         {%for image in item.get_images%}
                         <div class="tab-pane big-image fade show {%if forloop.first%} active {%endif%} " id="gallery-img{{image.id}}">
                             <div class="auction-gallery-timer d-flex align-items-center justify-content-center flex-wrap">
-                                <h3 id="countdown-timer-{{image.id}}">&nbsp;</h3>
+                                <h3 class="countdown-timer-{{item.id}}">{%if item.status == "Active" %}&nbsp;{%else%}COMPLETED{%endif%}</h3>
                             </div>
                             <img alt="image" src="{{image.image.url}}" class="img-fluid" >
                         </div>
@@ -47,10 +47,10 @@
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-5">
-                    <div class="product-details-right  wow fadeInDown"  data-wow-duration="1.5s" data-wow-delay=".2s">
+                    <div class="product-details-right">
                         <h3>{{item.productName}}</h3>
 <!--                        <p class="para">{{item.description}}</p>-->
-                        <h4>Bidding Price: <span>&#2547;{{item.buying_price}}</span></h4>
+                        <h4>Buying Price: <span>&#2547;{{item.buying_price}}</span></h4>
                         <div class="bid-form">
                             <div class="form-title">
                                 <h5>Bid Now</h5>
@@ -58,10 +58,13 @@
                             </div>
 
                              <div class="form-title" >
-                                 <h5 id="highestBid">Current Bid: &#2547;<span id="bid_value" data-toggle="counter-up">{% if item.get_bid_higest.bid_price %}{{item.get_bid_higest.bid_price}}{%endif%}</span></h5>
+                                 <h5 id="highestBid">Current Bid: &#2547;<span id="bid_value" data-toggle="counter-up">{% if item.get_bid_higest.bid_price %}{{item.get_bid_higest.bid_price}}{%else%}0{%endif%}</span><span>
+                                     {% if item.get_bid_higest.bidUser.user == request.user %}(you){%endif%}
+                                 </span></h5>
                             </div>
-
+                            {%if item.G_user.user != request.user %}
                             <form id="form_data">
+                                {%if item.status == "Active" %}
                                 {%if request.user.is_authenticated %}
 
                                 {%if request.user.GUser.otp_active == "No"%}
@@ -74,10 +77,14 @@
                                 {%endif%}
                                 {%else%}
                                  <div class="form-title" >
-                                     <h5>Please <a href="{% url 'Main:Login' %}" class="link-primary">Log in here</a> to bid</h5>
+                                     <h5>Please <a href="{% url 'Main:Login' %}?{{ request.GET.urlencode }}&next={{ request.path }}" class="link-primary">Log in here</a> to bid</h5>
                             </div>
                                 {%endif%}
+                                {%else%}
+                                <h2>Auction ended</h2>
+                                {%endif%}
                             </form>
+                            {%endif%}
                         </div>
                     </div>
                 </div>
@@ -195,13 +202,15 @@
 
 <script>
 
+    {%if item.status == "Active" %}
        function startCountDownDate(dateVal) {
       var countDownDate = new Date(dateVal).getTime();
 
       return countDownDate;
     }
-
+var intervalID;
     function countDownTimer(start, targetDOM) {
+            intervalID = setInterval(function() {
       // Get todays date and time
       var now = new Date().getTime();
 
@@ -221,33 +230,79 @@
       seconds = (seconds < 10) ? "0" + seconds : seconds;
 
       // Output the result in an element with countdown-timer-x"
-      var el_up = document.getElementById(targetDOM);
+      const el_up = document.querySelectorAll("."+targetDOM);
       if(el_up){
-      if(days=="00"){
-       document.querySelector("#" + targetDOM).textContent = hours + "H : " + minutes + "M : " + seconds + "S ";
+          el_up.forEach((element) => {
+    if(days=="00"){
+       element.textContent = hours + "H : " + minutes + "M : " + seconds + "S ";
       }
       else{
-        document.querySelector("#" + targetDOM).textContent = days + "D : " + hours + "H : " + minutes + "M : " + seconds + "S ";
+        element.textContent = days + "D : " + hours + "H : " + minutes + "M : " + seconds + "S ";
         }
+});
+
       }
 
 
       // If the count down is over, write some text
       if (distance < 0) {
-        clearInterval();
-        document.querySelector("#" + targetDOM).textContent = "EXPIRED";
-        document.querySelector("#" + targetDOM).style.color = "red";
+        clearInterval(intervalID);
+                  el_up.forEach((element) => {
+       element.textContent ="COMPLETED";
+                      element.style.color = "white";
+});
+        document.querySelector(".bid-form").textContent = "Auction Ended";
+                let formData = {
+                item_id: "{{item.id}}",
+            };
+            $.ajax({
+                type: "POST",
+                url: window.location.origin + "/item_completed",
+                data: formData,
+                beforeSend: function(xhr, settings) {
+                    xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
+                },
+                success: function() {
+                    console.log("success")
+                },
+                error: function() {
+                    console.log("error")
+                }
+            });
       }
+
+       }, 1000);
+
+    return intervalID;
     }
-{% for image in item.get_images %}
+    function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== "") {
+        let cookies = document.cookie.split(";");
+        for (let i = 0; i < cookies.length; i++) {
+            let cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + "=")) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
 
 
+    countDownTimer(startCountDownDate("{{item.end_date|escapejs}}"), "countdown-timer-{{item.id}}");
 
-    setInterval(function(){ countDownTimer(startCountDownDate("{{item.end_date|escapejs}}"), "countdown-timer-{{image.id}}"); }, 1000);
-{%endfor%}
+let loc = window.location
+let wsStart = 'ws://'
 
+if(loc.protocol === 'https') {
+    wsStart = 'wss://'
+}
+let endpoint = wsStart + loc.host + "/ws/auction-details/" + "{{item.id}}" + "/"
+
+var socket = new WebSocket(endpoint)
 //for websocket
-    const socket = new WebSocket("ws://" + window.location.host + "/ws/auction-details/" + "{{item.id}}" + "/");
 
     var form_data = $('#form_data');
     var bid_input = $('#id_bidder_amount');
@@ -257,38 +312,78 @@
 
     socket.onmessage = function(e){
         console.log("message", e)
-        bid_holder.html(""+e.data);
-    }
+            let data = JSON.parse(e.data)
+            let bid = data['bid']
+        console.log(data['completed'])
+        if(data['base'].toString() === "true") {
+             alert("নিলামের সর্বনিম্ন মূল্য থেকে বেশি হতে হবে")
 
-    socket.onopen = function(e){
-        console.log("open", e)
-        console.log(bid_holder.text())
-        form_data.submit(function(event){
+            $('#BidButton').prop('disabled', false); // Enable the submit button
+        $('#BidButton').html('Place Bid');
+        }
+        else  if(data['lesser_current'].toString() === "true") {
+             alert("bortoman bid er 10%  থেকে বেশি ba soman হতে হবে")
+
+            $('#BidButton').prop('disabled', false); // Enable the submit button
+        $('#BidButton').html('Place Bid');
+        }
+        else if(data['completed'].toString() === "true") {
+            console.log("buy completed");
+            document.querySelector("#form_data").textContent = "Auction Ended";
+            clearInterval(intervalID);
+            const el_up2 = document.querySelectorAll("."+"countdown-timer-{{item.id}}");
+            console.log(el_up2)
+            el_up2.forEach((element) => {
+       element.textContent ="COMPLETED";
+                      element.style.color = "white";
+});
+                    bid_holder.html(""+bid);
+        $('#BidButton').prop('disabled', false); // Enable the submit button
+        $('#BidButton').html('Place Bid');
+        }
+        else{
+               bid_holder.html(""+bid);
+        $('#BidButton').prop('disabled', false); // Enable the submit button
+        $('#BidButton').html('Place Bid');
+        }
+
+
+
+    }
+  form_data.submit(function(event){
             event.preventDefault()
+             $('#BidButton').prop('disabled', true); // Disable the submit button
+    $('#BidButton').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Submitting...');
             var bid_value = bid_input.val();
             var min_bid_value = parseInt(min_val.text());
             var c_value=parseInt(bid_holder.text())
-            bid_input.val('')
-            bid_holder.val('')
+
             console.log(bid_value)
-            console.log(c_value+50)
-            if (bid_value>c_value+50 && bid_value>=min_bid_value){
+            console.log(c_value+c_value*0.10)
+
             var final_data = {
                 'bid': bid_value
             };
-            socket.send(JSON.stringify(final_data))}
-            else {
-                alert("নিলামের সর্বনিম্ন মূল্য থেকে বেশি হতে হবে")
-            }
+            socket.send(JSON.stringify(final_data))
+
         })
+    socket.onopen = function(e){
+        console.log("open", e)
+        console.log(bid_holder.text())
+
     }
 
     socket.onerror = function(e){
         console.log("error", e)
+        socket = new WebSocket(endpoint)
     }
 
     socket.onclose = function(e){
         console.log("close", e)
+        socket = new WebSocket(endpoint)
     }
+
+   
+    {%endif%}
 </script>
 {% endblock %}

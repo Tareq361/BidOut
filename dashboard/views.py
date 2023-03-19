@@ -1,3 +1,4 @@
+from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -33,5 +34,13 @@ def PostItem(request):
     context={"AllCategory":category,"form":form}
 
     return render(request,"post-ad.html",context)
+
+@login_required()
+def update_profile(request):
+    if request.method == "POST":
+        GUser.update_user(request)
+        return HttpResponse("ok")
+
+
 
 

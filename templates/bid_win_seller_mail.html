@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+{% autoescape off %}
+Hi {{user.username}},
+{{winner.username}} won the auction for {{product.productName}} with a bid of {{price}}.
+Please go to your dashboard to connect with buyer.
+{% endautoescape%}
+</body>
+<footer>Copyright 2023| Shohojbid | AllRights Reserved</footer>
+</html>

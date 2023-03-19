@@ -29,14 +29,13 @@
                             <p>New Member? <a href="signup.html">signup here</a></p>
                         </div>
                                                                                     {% for message in messages%}
-<div class="alert alert-warning alert-dismissible fade show" role="alert">
-  <strong>{{message}}</strong>
-
-  </button>
+<div class="alert alert-danger" role="alert">
+    {{message}}
 </div>
                             {% endfor %}
                         <form action="{% url 'Main:Login' %}" method="POST" class="w-100">
                              {% csrf_token %}
+                             <input type="hidden" name="next" value="{{ request.GET.next }}">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-inner">

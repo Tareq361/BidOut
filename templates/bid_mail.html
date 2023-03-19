@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+</head>
+<body>
+{% autoescape off %}
+Hi {{user.username}},
+Sorry, your bid has been outbid for {{product.productName}}.
+Please consider increasing your bid amount if you'd like to continue competing for this item.
+click this link for new bid
+{% endautoescape%}
+</body>
+<footer>Copyright 2023| Shohojbid | AllRights Reserved</footer>
+</html>

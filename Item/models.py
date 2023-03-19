@@ -1,7 +1,9 @@
+from django.core.mail import EmailMessage
 from django.db import models
 from django.db.models import Subquery
 from django.db.models.signals import post_save
 from django.dispatch import receiver
+from django.template.loader import render_to_string
 from django.urls import reverse
 from django.utils import timezone
 import string
@@ -10,7 +12,7 @@ from ckeditor.fields import RichTextField
 from autoslug import AutoSlugField
 from autoslug.settings import slugify
 
-
+from GrowexoAuction import settings
 
 
 # from Guser.models import GUser
@@ -110,13 +112,57 @@ class bid_item(models.Model):
         return self.item.productName
 @receiver(post_save,sender=bid_item)
 def new_bid(sender,instance,**kwargs):
-    current_bid_price = instance.bid_price
-    item = instance.item
-    subquery = bid_item.objects.filter(item=item).exclude(bidUser=instance.bidUser).filter(bid_price__lt=current_bid_price).values('bidUser').distinct()
-    from Guser.models import GUser
-    bidders = GUser.objects.filter(id__in=Subquery(subquery)).distinct()
-    for bidder in bidders:
-        print(bidder.user.username)
+    if instance.status != "Won":
+        current_bid_price = instance.bid_price
+        item = instance.item
+        subquery = bid_item.objects.filter(item=item).exclude(bidUser=instance.bidUser).filter(bid_price__lt=current_bid_price).values('bidUser').distinct()
+        from Guser.models import GUser
+        bidders = GUser.objects.filter(id__in=Subquery(subquery)).distinct()
+        for bidder in bidders:
+            print(bidder.user.username)
+            if bidder.user.email:
+                mail_subject = "New Bid Alert"
+                messsage = render_to_string('bid_mail.html', {
+                    'user': bidder.user,
+                    'product': item,
+                })
+
+                email_from = settings.EMAIL_HOST_USER
+                recipient_list = [bidder.user.email, ]
+                e_message = EmailMessage(mail_subject, messsage, email_from, recipient_list)
+                e_message.content_subtype = 'html'
+                e_message.send()
+                print("send email successfully")
+            else:
+                pass
+    else:
+        print("winner bid mail")
+        print(instance.bidUser.user.username)
+        mail_subject = "Bid Winner"
+        messsage = render_to_string('bid_win_mail.html', {
+                'user': instance.bidUser.user,
+                'product': instance.item,
+            })
+
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [instance.bidUser.user.email, ]
+        e_message = EmailMessage(mail_subject, messsage, email_from, recipient_list)
+        e_message.content_subtype = 'html'
+        e_message.send()
+        print("send winner buyer email successfully")
+        mail_subject = "Auction End"
+        messsage2 = render_to_string('bid_win_seller_mail.html', {
+            'user': instance.item.G_user.user,
+            'product': instance.item,
+            'winner': instance.bidUser.user,
+            'price': instance.bid_price,
+        })
+        print(instance.item.G_user.user.email)
+        recipient_list2 = [instance.item.G_user.user.email, ]
+        e_message2 = EmailMessage(mail_subject, messsage2, email_from, recipient_list2)
+        e_message2.content_subtype = 'html'
+        e_message2.send()
+        print("send winner seller email successfully")
 class item_gallery(models.Model):
     item=models.ForeignKey(Item,on_delete=models.CASCADE,default=None)
     image=models.ImageField(upload_to='item_image/item_gallery/')

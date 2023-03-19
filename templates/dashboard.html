@@ -19,8 +19,8 @@
     <!-- ========== inner-page-banner end ============= -->
 
     <div class="dashboard-section pt-120 pb-120">
-        <img alt="image" src="assets/images/bg/section-bg.png" class="img-fluid section-bg-top" >
-        <img alt="image" src="assets/images/bg/section-bg.png" class="img-fluid section-bg-bottom" >
+        <img alt="image" src="{% static 'images/bg/section-bg.png' %}" class="img-fluid section-bg-top" >
+        <img alt="image" src="{% static 'images/bg/section-bg.png' %}" class="img-fluid section-bg-bottom" >
         <div class="container">
             <div class="row g-4">
                 <div class="col-lg-3">
@@ -45,13 +45,13 @@
                         <button class="nav-link nav-btn-style mx-auto mb-20" id="v-pills-order-tab" data-bs-toggle="pill" data-bs-target="#v-pills-order" type="button" role="tab"  aria-controls="v-pills-order" aria-selected="true"><svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
                             <path d="M19.7115 18.1422L18.729 5.7622C18.6678 4.96461 17.9932 4.3398 17.1933 4.3398H15.2527V4.25257C15.2527 1.90768 13.345 0 11.0002 0C8.65527 0 6.74758 1.90768 6.74758 4.25257V4.3398H4.80703C4.00708 4.3398 3.33251 4.96457 3.2715 5.76052L2.28872 18.1439C2.21266 19.1354 2.55663 20.1225 3.23235 20.852C3.90808 21.5815 4.86598 22 5.86041 22H16.1399C17.1342 22 18.0922 21.5816 18.768 20.852C19.4437 20.1224 19.7876 19.1354 19.7115 18.1422ZM8.03622 4.25257C8.03622 2.61826 9.36588 1.28863 11.0002 1.28863C12.6344 1.28863 13.9641 2.6183 13.9641 4.25257V4.3398H8.03622V4.25257ZM17.8225 19.9764C17.3835 20.4503 16.7859 20.7114 16.1399 20.7114H5.86045C5.21437 20.7114 4.61685 20.4503 4.17779 19.9764C3.73878 19.5024 3.5242 18.8866 3.57352 18.2441L4.55622 5.86072C4.56619 5.73044 4.67636 5.62843 4.80703 5.62843H6.74758V7.21548C6.74758 7.57131 7.03607 7.8598 7.3919 7.8598C7.74772 7.8598 8.03622 7.57131 8.03622 7.21548V5.62843H13.9641V7.21548C13.9641 7.57131 14.2526 7.8598 14.6084 7.8598C14.9642 7.8598 15.2527 7.57131 15.2527 7.21548V5.62843H17.1933C17.324 5.62843 17.4341 5.73048 17.4443 5.86244L18.4267 18.2424C18.4762 18.8866 18.2615 19.5024 17.8225 19.9764Z"/>
                             <path d="M13.9035 10.9263C13.652 10.6746 13.244 10.6746 12.9924 10.9263L10.1154 13.8033L9.00909 12.697C8.75751 12.4454 8.34952 12.4454 8.0979 12.697C7.84627 12.9486 7.84627 13.3566 8.0979 13.6082L9.65977 15.1701C9.78558 15.2959 9.9505 15.3588 10.1153 15.3588C10.2802 15.3588 10.4451 15.2959 10.5709 15.1701L13.9034 11.8375C14.1551 11.5858 14.1551 11.1779 13.9035 10.9263Z"/>
-                            </svg>  Order Bidding</button>
+                            </svg>My Products</button>
                         <button class="nav-link nav-btn-style mx-auto" id="v-pills-purchase-tab" data-bs-toggle="pill" data-bs-target="#v-pills-purchase" type="button" role="tab" aria-controls="v-pills-purchase" aria-selected="true">
                             <svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7.41246 0.0859337C6.34254 0.356638 5.40152 1.12578 4.92027 2.11836C4.61519 2.75429 4.58941 2.90039 4.56793 4.00468L4.54644 4.98437H3.02535H1.50425L1.48707 5.0789C1.43121 5.36679 0.80816 16.6977 0.829644 17.0586C0.898394 18.266 1.66754 19.3402 2.80621 19.8215C3.39488 20.0664 3.38199 20.0664 7.73473 20.0664H11.7222L12.1218 20.466C12.9211 21.2523 13.875 21.7508 14.9535 21.9398C15.5636 22.043 16.6336 22.0043 17.1879 21.8582C19.13 21.334 20.5308 19.9203 21.0422 17.9695C21.1882 17.4066 21.2226 16.457 21.1238 15.834C20.707 13.3117 18.4769 11.3867 15.9589 11.3867H15.5593L15.5379 11.159C15.525 11.0387 15.4433 9.72812 15.3617 8.25C15.28 6.77187 15.1984 5.43554 15.1855 5.27226L15.1597 4.98437H13.6386H12.1175V4.19375C12.1175 3.32148 12.0574 2.87461 11.8726 2.40625C11.4429 1.31914 10.5793 0.511326 9.45348 0.150387C9.13121 0.0429649 9.0066 0.0300751 8.42223 0.0171852C7.86363 0.00429344 7.70035 0.0171852 7.41246 0.0859337ZM8.93785 1.39648C9.80582 1.62851 10.5148 2.35468 10.7211 3.22695C10.764 3.41601 10.7855 3.73398 10.7855 4.24101V4.98437H8.33629H5.88707V4.20664C5.88707 3.34726 5.93004 3.08515 6.14488 2.66836C6.45426 2.0625 7.05582 1.57265 7.70465 1.39648C8.00113 1.31914 8.64137 1.31914 8.93785 1.39648ZM4.55504 7.13281V7.94922H5.22105H5.88707V7.13281V6.3164H8.33629H10.7855V7.13281V7.94922H11.4515H12.1175V7.13281V6.3164H13.0199C13.8964 6.3164 13.9222 6.3207 13.9222 6.40234C13.9222 6.44961 13.991 7.64414 14.0726 9.05351C14.1586 10.4586 14.2187 11.6187 14.2144 11.623C14.2058 11.6273 14.0425 11.7004 13.8449 11.7863C12.3539 12.4223 11.2796 13.5867 10.8113 15.0734C10.4804 16.1219 10.489 17.368 10.8285 18.382L10.9488 18.7387L7.28785 18.7258L3.63121 18.7129L3.39488 18.6184C2.91363 18.4207 2.45386 17.9609 2.27769 17.5012C2.22183 17.3594 2.17027 17.1144 2.16168 16.9297C2.14449 16.6633 2.64293 7.66562 2.73316 6.62578L2.75894 6.3164H3.65699H4.55504V7.13281ZM16.9429 12.8648C18.0515 13.1914 18.9324 13.9262 19.4308 14.9316C19.7273 15.5246 19.8519 16.0531 19.8519 16.7105C19.8476 18.3519 18.8379 19.8172 17.2996 20.4145C16.8312 20.5949 16.4144 20.6723 15.8773 20.6723C14.9234 20.6723 14.1414 20.3973 13.3765 19.7914C12.7707 19.3102 12.2507 18.5195 12.0273 17.7461C11.8984 17.2863 11.8683 16.4227 11.9629 15.9371C12.255 14.5105 13.3379 13.3117 14.7257 12.8906C15.2027 12.7445 15.4089 12.723 16.0062 12.7402C16.4488 12.7488 16.6422 12.7789 16.9429 12.8648Z"/>
                                 <path d="M16.4186 15.8812C15.7698 16.5516 15.2284 17.0973 15.2069 17.093C15.1897 17.0844 14.919 16.7922 14.6097 16.4441L14.0425 15.8039L13.905 15.9285C13.8319 15.9973 13.6128 16.1949 13.4151 16.3711C13.2218 16.543 13.0671 16.702 13.0714 16.7191C13.0972 16.775 15.1425 19.0781 15.1725 19.0781C15.1897 19.0781 15.9675 18.2875 16.8999 17.325L18.5971 15.5676L18.1417 15.1121C17.8882 14.8586 17.6604 14.6523 17.6389 14.6523C17.6132 14.6566 17.0675 15.2066 16.4186 15.8812Z"/>
                                 </svg>
-                            Purchase</button>
+                            My Bid</button>
                             <button class="nav-link nav-btn-style mx-auto" type="button" role="tab" ><svg width="22" height="22" viewBox="0 0 22 22" xmlns="http://www.w3.org/2000/svg">
                                 <g clip-path="url(#clip0_382_377)">
                                 <path d="M21.7273 10.4732L19.3734 8.81368C18.9473 8.51333 18.3574 8.81866 18.3574 9.34047V12.6595C18.3574 13.1834 18.9485 13.4856 19.3733 13.1863L21.7272 11.5268C22.0916 11.2699 22.0906 10.7294 21.7273 10.4732Z"/>
@@ -175,7 +175,7 @@
                             <div class="dashboard-profile">
                                 <div class="owner">
                                     <div class="image">
-                                        <img alt="image" src="assets/images/bg/pro-pic.png" >
+                                        <img alt="image" src="{% static 'images/bg/pro-pic.png' %}" >
                                     </div>
                                     <div class="content">
                                         <h3>{{user.username}}</h3>
@@ -183,94 +183,53 @@
                                     </div>
                                 </div>
                                 <div class="form-wrapper">
-                                    <form action="#">
+                                    <form id="my_dashboard"action="" method="POST">
+                                        {% csrf_token %}
                                         <div class="row">
                                             <div class="col-xl-6 col-lg-12 col-md-6">
                                                 <div class="form-inner">
-                                                    <label>Frist Name *</label>
-                                                    <input type="text" placeholder="Your first name">
+                                                    <label>User Name *</label>
+                                                    <input type="text" placeholder="Your first name" name="username" value="{{user.username}}">
                                                 </div>
                                             </div>
-                                            <div class="col-xl-6 col-lg-12 col-md-6">
-                                                <div class="form-inner">
-                                                    <label>Last Name *</label>
-                                                    <input type="text" placeholder="Your last name">
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-12 col-md-6">
-                                                <div class="form-inner">
-                                                <label>Contact Number</label>
-                                                    <input type="text" placeholder="+8801">
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-12 col-md-6">
-                                                <div class="form-inner">
-                                                    <label>Email</label>
-                                                    <input type="text" placeholder="Your Email">
-                                                </div>
-                                            </div>
+
+<!--                                            <div class="col-xl-6 col-lg-12 col-md-6">-->
+<!--                                                <div class="form-inner">-->
+<!--                                                <label>Contact Number *</label>-->
+<!--                                                    <input type="text" placeholder="+8801"  name="phonenumber"value="{{request.user.guser.phoneNumber}}">-->
+<!--                                                </div>-->
+<!--                                            </div>-->
+<!--                                            <div class="col-xl-6 col-lg-12 col-md-6">-->
+<!--                                                <div class="form-inner">-->
+<!--                                                    <label>Email *</label>-->
+<!--                                                    <input type="email" name="email" placeholder="Your Email" value="{{request.user.email}}">-->
+<!--                                                </div>-->
+<!--                                            </div>-->
                                             <div class="col-12">
                                                 <div class="form-inner">
-                                                    <label>Address</label>
-                                                    <input type="text" name="message">
+                                                    <label>Address *</label>
+                                                    <input type="text"  name="address"name="message" >
                                                 </div>
                                             </div>
-                                            <div class="col-xl-6 col-lg-12 col-md-6">
-                                                <div class="form-inner">
-                                                    <label>City</label>
-                                                    <select id="city">
-                                                        <option>Dhaka</option>
-                                                        <option>Sylhet</option>
-                                                        <option>Chittagong</option>
-                                                        <option>Rajshahi</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-12 col-md-6">
-                                                <div class="form-inner">
-                                                    <label>State</label>
-                                                    <select name="state" id="state">
-                                                        <option>Dhaka</option>
-                                                        <option>Sylhet</option>
-                                                        <option>Chittagong</option>
-                                                        <option>Rajshahi</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-12 col-md-6">
-                                                <div class="form-inner">
-                                                    <label>Zip Code</label>
-                                                    <input type="text" placeholder="00000">
-                                                </div>
-                                            </div>
-                                            <div class="col-xl-6 col-lg-12 col-md-6">
-                                                <div class="form-inner">
-                                                    <label>Country</label>
-                                                    <select>
-                                                        <option>Bangladesh</option>
-                                                        <option>Afganistan</option>
-                                                        <option>India</option>
-                                                        <option>China</option>
-                                                    </select>
-                                                </div>
-                                            </div>
+
                                             <div class="col-12">
                                                 <div class="form-inner">
                                                     <label>Password *</label>
-                                                    <input type="password" name="password" id="password" placeholder="Create A Password"/>
+                                                    <input type="password" name="password" id="password" minlength="8" placeholder="Create A Password"/>
                                                     <i class="bi bi-eye-slash" id="togglePassword"></i>
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="form-inner mb-0">
                                                     <label>Confirm Password *</label>
-                                                    <input type="password" name="password" id="password2" placeholder="Create A Password"/>
+                                                    <input type="password" name="confirm_password" minlength="8" id="password2" placeholder="Create A Password"/>
                                                     <i class="bi bi-eye-slash" id="togglePassword2"></i>
                                                 </div>
                                             </div>
                                             <div class="col-12">
+
                                                 <div class="button-group">
-                                                    <button type="submit" class="eg-btn profile-btn">Update Profile</button>
+                                                    <button type="submit" id="submitBtn" class="eg-btn profile-btn">Update Profile</button>
                                                     <button class="eg-btn cancel-btn">Cancel</button>
                                                 </div>
                                             </div>
@@ -283,7 +242,7 @@
                             aria-labelledby="v-pills-order-tab">
                             <!-- table title-->
                             <div class="table-title-area">
-                                <h3>My Item List</h3>
+                                <h3>My Product List</h3>
 
                                 <select>
                                     <option value="01">Show: Last 05 Order</option>
@@ -292,16 +251,17 @@
                                     <option value="04">Show: Last 20 Order</option>
                                 </select>
                             </div>
-                             <a href="{% url 'dashboard:postItem' %}" class="btn--primary3-outline rounded btn--md">Post Item</a>
+                             <a href="{% url 'dashboard:postItem' %}" class="btn--primary3-outline rounded btn--md">Add New</a>
 
                             <!-- table -->
                             <div class="table-wrapper">
                                 <table class="eg-table order-table table mb-0">
                                     <thead>
                                         <tr>
-                                            <th>Image</th>
                                             <th>Bidding ID</th>
-                                            <th>Bid Amount(BDT)</th>
+                                            <th>Title</th>
+                                            <th>Image</th>
+                                            <th>Minimum Bid Amount(BDT)</th>
                                             <th>Highest Bid</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -310,12 +270,14 @@
                                     <tbody>
                                     {% for item in user_item.get_own_item%}
                                         <tr>
-                                            <td data-label="Image"><img alt="image" src="{{item.get_image.url}}" class="img-fluid" ></td>
                                             <td data-label="Bidding ID">Bidding_Hv{{item.id}}</td>
+                                            <td data-label="Title">{{item.productName}}</td>
+                                            <td data-label="Image"><img alt="image" src="{{item.get_image.url}}" class="img-fluid" ></td>
                                             <td data-label="Bid Amount(USD)">{{item.base_price}}</td>
                                             <td data-label="Highest Bid">{{item.get_bid_higest.bid_price}}</td>
                                             <td data-label="Status" class="text-green">{{item.status}}</td>
-                                                  <td> <a  class="btn btn-outline-success card-link" style="margin: 10px"><i class="bi bi-chat-left-quote-fill"></i></a>
+                                                  <td data-label="Action"> {%if item.status == "Completed"%}<a class="btn btn-outline-success card-link owner-btn" style="margin: 10px" data-type="Bidder" data-owner-username="{{ item.get_bid_higest.bidUser.user.username }}" data-owner-email="{{ item.get_bid_higest.bidUser.user.email }}" data-owner-phone="{{ item.get_bid_higest.bidUser.phoneNumber }}"><i class="bi bi-chat-left-quote-fill"></i></a>
+                                                      {%endif%}
                                                     <a href="{{item.get_absolute_url}}" class="btn btn-outline-primary card-link" style="margin: 10px"><i class="bi bi-info-lg"></i></a>
 <!--        <a class="btn btn-outline-danger card-link" style="margin: 10px"><i class="bi bi-trash-fill"></i></a></td>-->
                                         </tr>
@@ -348,13 +310,8 @@
                             aria-labelledby="v-pills-purchase-tab">
                             <!-- table title-->
                             <div class="table-title-area">
-                                <h3>All Purchase</h3>
-                                <select id="order-category">
-                                    <option value="01">Show: Last 05 Order</option>
-                                    <option value="02">Show: Last 03 Order</option>
-                                    <option value="03">Show: Last 15 Order</option>
-                                    <option value="04">Show: Last 20 Order</option>
-                                </select>
+                                <h3>All Bid</h3>
+
                             </div>
 
                             <!-- table -->
@@ -362,39 +319,30 @@
                                 <table class="eg-table order-table table mb-0">
                                     <thead>
                                         <tr>
-                                            <th>Title</th>
                                             <th>Bidding ID</th>
-                                            <th>Bid Amount(USD)</th>
+                                            <th>Title</th>
                                             <th>Image</th>
+                                            <th>Minimum Bid Amount(BDT)</th>
+                                            <th>My Bid(BDT)</th>
                                             <th>Status</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                                                            {% for item in user_item.get_bid_item%}
                                         <tr>
-                                            <td data-label="Title">Auction Title 01</td>
-                                            <td data-label="Bidding ID">Bidding_HvO253gT</td>
-                                            <td data-label="Bid Amount(USD)">1222.8955</td>
-                                            <td data-label="Image"><img alt="image" src="assets/images/bg/order1.png" class="img-fluid" ></td>
-                                            <td data-label="Status" class="text-green">Successfully</td>
-                                            <td data-label="Action"><button class="eg-btn action-btn green"><img alt="image" src="assets/images/icons/aiction-icon.svg" ></button></td>
+                                            <td data-label="Bidding ID">Bidding_Hv{{item.item.id}}</td>
+                                            <td data-label="Title">{{item.item.productName}}</td>
+                                            <td data-label="Image"><img alt="image" src="{{item.item.get_image.url}}" class="img-fluid" ></td>
+                                            <td data-label="Minimum Bid Amount(BDT)">{{item.item.base_price}}</td>
+                                            <td data-label="My Bid">{{item.bid_price}}</td>
+                                            <td data-label="Status" class="text-green">{{item.status}}</td>
+                                                  <td data-label="Action"> {%if item.status == "Won"%}<a class="btn btn-outline-success card-link owner-btn" style="margin: 10px" data-type="Owner" data-owner-username="{{ item.item.G_user.user.username }}" data-owner-email="{{ item.item.G_user.user.email }}" data-owner-phone="{{ item.item.G_user.phoneNumber }}"><i class="bi bi-chat-left-quote-fill"></i></a>
+                                                      {%endif%}
+                                                    <a href="{{item.item.get_absolute_url}}" class="btn btn-outline-primary card-link" style="margin: 10px"><i class="bi bi-info-lg"></i></a>
+<!--        <a class="btn btn-outline-danger card-link" style="margin: 10px"><i class="bi bi-trash-fill"></i></a></td>-->
                                         </tr>
-                                        <tr>
-                                            <td data-label="Title">Auction Title 02</td>
-                                            <td data-label="Bidding ID">Bidding_HvO253gT</td>
-                                            <td data-label="Bid Amount(USD)">1222.8955</td>
-                                            <td data-label="Image"><img alt="image" src="assets/images/bg/order2.png" ></td>
-                                            <td data-label="Status" class="text-green">Successfully</td>
-                                            <td data-label="Action"><button class="eg-btn action-btn green"><img alt="image" src="assets/images/icons/aiction-icon.svg" ></button></td>
-                                        </tr>
-                                        <tr>
-                                            <td data-label="Title">Auction Title 03</td>
-                                            <td data-label="Bidding ID">Bidding_HvO253gT</td>
-                                            <td data-label="Bid Amount(USD)">1222.8955</td>
-                                            <td data-label="Image"><img alt="image" src="assets/images/bg/order3.png" ></td>
-                                            <td data-label="Status" class="text-green">Cancel</td>
-                                            <td data-label="Action"><button class="eg-btn action-btn green"><img alt="image" src="assets/images/icons/aiction-icon.svg" ></button></td>
-                                        </tr>
+                                        {%endfor%}
                                     </tbody>
                                 </table>
                             </div>
@@ -422,8 +370,74 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
 
+        </div>
+                 <div id="notification" style="display: none;
+  position: fixed;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%, -50%); font-size: 20px;" class="alert alert-success" role="alert">
+  Update successful!
+</div>
+
+    </div>
+<div class="modal fade" id="ownerModal" role="dialog" aria-labelledby="ownerModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ownerModalLabel"><span id="type_model"></span> Information</h5>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p><strong>Username:</strong> <span id="ownerUsername"></span></p>
+        <p><strong>Email:</strong> <span id="ownerEmail"></span></p>
+        <p><strong>Phone:</strong> <span id="ownerPhone"></span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+$(document).ready(function() {
+  $('#my_dashboard').submit(function(event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+    var password = $('#password').val(); // Get the password value
+    var confirm_password = $('#password2').val(); // Get the confirm password value
+    if (password && confirm_password && password != confirm_password) { // Check if the passwords match (if they are not empty)
+      alert('Passwords do not match!'); // Display an alert message
+      return false; // Stop the form from submitting
+    }
+    var formData = $(this).serialize(); // Serialize the form data
+    $('#submitBtn').prop('disabled', true); // Disable the submit button
+    $('#submitBtn').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Submitting...'); // Add a spinner to the submit button
+    $.ajax({
+      url: 'updateProfile/',
+      type: 'post',
+      data: formData,
+      success: function(response) {
+        console.log(response) // Display the response in a div
+           $('#password').val('');
+        $('#password2').val('');
+        $('#submitBtn').prop('disabled', false); // Enable the submit button
+        $('#submitBtn').html('Update Profile'); // Remove the spinner from the submit button
+           $('#notification').fadeIn(1000).delay(3000).fadeOut(1000);
+      }
+    });
+  });
+
+   $('.owner-btn').click(function() {
+    var ownerUsername = $(this).data('owner-username');
+    var ownerEmail = $(this).data('owner-email');
+    var ownerPhone = $(this).data('owner-phone');
+    var type = $(this).data('type');
+
+    $('#ownerUsername').text(ownerUsername);
+    $('#ownerEmail').text(ownerEmail);
+    $('#ownerPhone').text(ownerPhone);
+    $('#type_model').text(type);
+    $('#ownerModal').modal('show');
+  });
+});
+</script>
 
 {% endblock %}

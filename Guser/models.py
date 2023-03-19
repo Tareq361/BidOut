@@ -7,7 +7,7 @@ from django.template.loader import render_to_string
 from django.urls import reverse
 
 from GrowexoAuction import settings
-from Item.models import Item
+from Item.models import Item, bid_item
 from django.db.models.signals import pre_save,post_save
 from django.dispatch import receiver
 from django.utils.crypto import get_random_string
@@ -75,9 +75,35 @@ class GUser(models.Model):
         e_message.send()
         print("send activation link successfully")
         return guser
+    def update_user(request):
+        request.user.username=request.POST.get('username')
+        if request.POST.get('confirm_password'):
+            request.user.set_password(request.POST.get('confirm_password'))
+            mail_subject = "Password Changed"
+            messsage = render_to_string('password_change.html', {
+                'user': request.user,
+
+            })
+
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [request.user.email, ]
+            e_message = EmailMessage(mail_subject, messsage, email_from, recipient_list)
+            e_message.content_subtype = 'html'
+            e_message.send()
+            print("send email successfully")
+
+        request.user.save()
+        return True
     def get_own_item(self):
 
         return Item.objects.filter(G_user=self)
+    def get_bid_item(self):
+        bid_items = bid_item.objects.filter(bidUser=self).order_by('item', '-created_date')
+        unique_items = {}
+        for item in bid_items:
+            if item.item not in unique_items:
+                unique_items[item.item] = item
+        return list(unique_items.values())
     def get_absolute_url(self):
         return reverse("Guser:Active")
 
