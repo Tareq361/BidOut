@@ -43,13 +43,22 @@ class LiveBiddingConsumer(AsyncConsumer):
                 'lesser_current':lesser_current,
                 'base':base
             }
-            await self.channel_layer.group_send(
-                self.product_id,
-                {
-                    'type': 'chat_message',
-                    'text': json.dumps(response)
-                }
-            )
+            if lesser_current or base:
+                print("lesser base")
+                await self.chat_message(
+                    {
+                        'type': 'chat_message',
+                        'text': json.dumps(response)
+                    }
+                )
+            else:
+                await self.channel_layer.group_send(
+                    self.product_id,
+                    {
+                        'type': 'chat_message',
+                        'text': json.dumps(response)
+                    }
+                )
 
     async def websocket_disconnect(self, event):
         print("disconnected", event)
