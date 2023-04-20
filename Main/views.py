@@ -117,3 +117,12 @@ def Login(request):
 def Logout(request):
     logout(request);
     return redirect('/')
+
+
+
+@login_required
+def send_security_money(request):
+    if request.method == "POST":
+        print(request.POST)
+
+        return HttpResponse("ok",status=200)

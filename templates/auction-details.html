@@ -199,7 +199,27 @@
             </div>
         </div>
     </div>
-
+ <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" data-backdrop="static">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Send Security Money</h4>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <p>Send this amount to 0139012392</p>
+        <div class="form-group" id="emailInputContainer">
+          <label for="bnnumber">Bkash Or Nagad Number</label>
+          <input type="text" class="form-control" id="bnnumber" aria-describedby="emailHelp" placeholder="Enter mobile number" required>
+        </div>
+      </div>
+         <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary" id="numbersendbtn">Send</button>
+      </div>
+    </div>
+  </div>
+ </div>
 <script>
 
     {%if item.status == "Active" %}
@@ -351,7 +371,42 @@ var socket = new WebSocket(endpoint)
 
     }
   form_data.submit(function(event){
-            event.preventDefault()
+      event.preventDefault();
+      {% if has_paid is False %}
+        console.log("not paid")
+        var numbersendbtn = document.getElementById("numbersendbtn");
+        var modal = new bootstrap.Modal(document.getElementById('myModal'));
+        modal.show();
+         numbersendbtn.addEventListener('click', function() {
+         var numberInput = document.getElementById("bnnumber");
+         var numValue = numberInput.value.trim();
+         if (numValue.length == 0) {
+            alert("Please enter the bkash number.");
+                 return;
+                    }
+         let formData = {
+                item_id: "{{item.id}}",
+                number: numValue
+            };
+         $.ajax({
+                type: "POST",
+                url: window.location.origin + "/send_security_money",
+                data: formData,
+                beforeSend: function(xhr, settings) {
+                    xhr.setRequestHeader("X-CSRFToken", getCookie("csrftoken"));
+                },
+                success: function() {
+                    console.log("success")
+                },
+                error: function() {
+                    console.log("error")
+                }
+            });
+
+         });
+
+      {%else%}
+
              $('#BidButton').prop('disabled', true); // Disable the submit button
     $('#BidButton').html('<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Submitting...');
             var bid_value = bid_input.val();
@@ -365,6 +420,8 @@ var socket = new WebSocket(endpoint)
                 'bid': bid_value
             };
             socket.send(JSON.stringify(final_data))
+
+{%endif%}
 
         })
     socket.onopen = function(e){

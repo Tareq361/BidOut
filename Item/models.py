@@ -110,6 +110,23 @@ class bid_item(models.Model):
         ordering=['-created_date']
     def __str__(self):
         return self.item.productName
+
+
+class BidSecurity(models.Model):
+    item = models.ForeignKey(Item, on_delete=models.CASCADE)
+    bidUser = models.ForeignKey('Guser.GUser', on_delete=models.DO_NOTHING, default=None)
+    security_money = models.FloatField(default=0.0)
+
+    def __str__(self):
+        return f"Security money for {self.bidUser.user.usernam}"
+
+    def get_status(item,user):
+        try:
+            BidSecurity.objects.get(item=item,bidUser=user)
+            return True
+        except BidSecurity.DoesNotExist:
+            return False
+
 @receiver(post_save,sender=bid_item)
 def new_bid(sender,instance,**kwargs):
     if instance.status != "Won":

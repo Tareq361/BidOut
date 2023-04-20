@@ -10,4 +10,5 @@ urlpatterns = [
     path('item_completed',views.item_completed,name="item_completed"),
     path('Login', views.Login, name='Login'),
     path('Logout', views.Logout, name='Logout'),
+    path('send_security_money',views.send_security_money,name="send_security_money"),
 ]
