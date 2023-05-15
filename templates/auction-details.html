@@ -206,20 +206,42 @@
         <h4 class="modal-title" id="myModalLabel">Send Security Money</h4>
          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
-      <div class="modal-body">
-          <p>Send this amount to 0139012392</p>
+          {% if has_paid == "False" %}
+        <div class="modal-body">
+          <p>1)Send <strong>BDT{{security_money}}</strong> to <strong>0139012392</strong></p>
+          <p>2)Your Reference Number <strong>{{item.id}}{{request.user.guser_user.id}}</strong></p>
+          <p>After Send the money please enter the sender number for verify</p>
         <div class="form-group" id="emailInputContainer">
           <label for="bnnumber">Bkash Or Nagad Number</label>
           <input type="text" class="form-control" id="bnnumber" aria-describedby="emailHelp" placeholder="Enter mobile number" required>
+        </div>
+          <div class="form-group" id="">
+          <input type="hidden" class="form-control" id="rnumber" aria-describedby="emailHelp" placeholder="Enter reference" value="{{item.id}}{{request.user.guser_user.id}}" required>
         </div>
       </div>
          <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
         <button type="button" class="btn btn-primary" id="numbersendbtn">Send</button>
       </div>
+        {%else%}
+         <div class="modal-body">
+        <p>Your given money is not validate yet. You can bid as soon as we validate your security money.</p>
+         </div>
+         <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+        {%endif%}
     </div>
   </div>
  </div>
+ <div id="notification" style="display: none;
+  position: fixed;
+  top: 20%;
+  left: 80%;
+  transform: translate(-50%, -50%); font-size: 20px;" class="alert alert-success" role="alert">
+     We get the request of your deposit. <br>
+     You can bid as soon as we validate your send money
+</div>
 <script>
 
     {%if item.status == "Active" %}
@@ -372,7 +394,7 @@ var socket = new WebSocket(endpoint)
     }
   form_data.submit(function(event){
       event.preventDefault();
-      {% if has_paid is False %}
+      {% if has_paid == "False" or has_paid == "Unpaid" %}
         console.log("not paid")
         var numbersendbtn = document.getElementById("numbersendbtn");
         var modal = new bootstrap.Modal(document.getElementById('myModal'));
@@ -380,13 +402,16 @@ var socket = new WebSocket(endpoint)
          numbersendbtn.addEventListener('click', function() {
          var numberInput = document.getElementById("bnnumber");
          var numValue = numberInput.value.trim();
+         var referInput = document.getElementById("rnumber");
+         var refer_num = referInput.value.trim();
          if (numValue.length == 0) {
             alert("Please enter the bkash number.");
                  return;
                     }
          let formData = {
                 item_id: "{{item.id}}",
-                number: numValue
+                number: numValue,
+                refer_num: refer_num,
             };
          $.ajax({
                 type: "POST",
@@ -397,6 +422,8 @@ var socket = new WebSocket(endpoint)
                 },
                 success: function() {
                     console.log("success")
+                     modal.hide();
+                       document.getElementById('notification').fadeIn(1000).delay(3000).fadeOut(1000);
                 },
                 error: function() {
                     console.log("error")

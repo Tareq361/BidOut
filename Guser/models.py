@@ -14,7 +14,7 @@ from django.utils.crypto import get_random_string
 def custom_slugify(value):
     return slugify(value).replace(' ', '_')
 class GUser(models.Model):
-    user = models.OneToOneField(User,on_delete=models.CASCADE)
+    user = models.OneToOneField(User,on_delete=models.CASCADE, related_name="guser_user")
     phoneNumber = models.CharField(max_length=14,null=False)
     otp=models.CharField(max_length=4,null=True)
     slug = AutoSlugField(populate_from='phoneNumber',

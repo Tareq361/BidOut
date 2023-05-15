@@ -113,19 +113,26 @@ class bid_item(models.Model):
 
 
 class BidSecurity(models.Model):
+    STATUS = (
+        ('Paid', 'Paid'),
+        ('Unpaid', 'Unpaid'),
+    )
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     bidUser = models.ForeignKey('Guser.GUser', on_delete=models.DO_NOTHING, default=None)
     security_money = models.FloatField(default=0.0)
+    number = models.CharField(max_length=200, default="")
+    reference_number = models.CharField(max_length=200,default="")
+    status = models.CharField(max_length=20, choices=STATUS, default='Unpaid')
 
     def __str__(self):
-        return f"Security money for {self.bidUser.user.usernam}"
+        return f"Security money for {self.item.productName} by {self.bidUser.user.username} {self.status}"
 
     def get_status(item,user):
         try:
-            BidSecurity.objects.get(item=item,bidUser=user)
-            return True
+            security = BidSecurity.objects.get(item=item,bidUser=user)
+            return security.status
         except BidSecurity.DoesNotExist:
-            return False
+            return "False"
 
 @receiver(post_save,sender=bid_item)
 def new_bid(sender,instance,**kwargs):

@@ -41,6 +41,7 @@ class AuctionDetailsView(DetailView):
             buyer = GUser.objects.get(user=self.request.user)
 
             has_paid = BidSecurity.get_status(item=item, user=buyer)
+            context['security_money'] = item.base_price*0.10
 
         # Add the has_paid variable to the context
         context['has_paid'] = has_paid
